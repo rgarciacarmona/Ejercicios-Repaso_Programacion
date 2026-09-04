@@ -347,7 +347,7 @@ contraseña2 : valor_bololeano2
 
     Esta clase, además, deberá contener el método \code{toString()}, que devolverá una cadena de caracteres que representará el DNI.
 
-    Emplee excepciones para impedir que se cree un DNI cuya letra no sea compatible con el número.
+    Emplee excepciones siempre que estas clases deban rechazar un dato: al asignar un peso o una altura que no sean mayores que 0, al pedir el BMI de una persona que todavía no los tenga, al crear un DNI cuya letra no se corresponda con su número, y al construir un DNI a partir de un texto que no lo sea. Captúrelas en el \code{main} y muestre un mensaje al usuario en lugar de la traza del error.
 
     Por último, cree una clase que se pueda ejecutar que haga lo siguiente, en orden:
 

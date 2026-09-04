@@ -16,7 +16,7 @@ jobs:
       - name: Clean docs folder
         run: |
           mkdir -p docs
-          # Remove all files from docs except .gitkeep
+          # Remove everything: docs is regenerated in full from Overleaf
           find docs -type f -delete
           find docs -type d -empty -delete
 
@@ -37,7 +37,10 @@ jobs:
       - name: Remove LaTeX auxiliary files
         run: |
           cd docs/
-          rm -f *.aux *.log *.out *.toc *.fls *.fdb_latexmk *.synctex.gz *.bbl *.blg
+          # find, not globs: latexmk also leaves artefacts in subdirectories
+          find . \( -name '*.aux' -o -name '*.log' -o -name '*.out' -o -name '*.toc' \
+            -o -name '*.fls' -o -name '*.fdb_latexmk' -o -name '*.synctex.gz' \
+            -o -name '*.bbl' -o -name '*.blg' -o -name '*-eps-converted-to.pdf' \) -delete
           sudo rm -rf _minted*
 
       - name: Commit and push if changed

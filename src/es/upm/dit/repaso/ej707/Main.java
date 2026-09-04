@@ -17,6 +17,21 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 
+		// Person y DNI rechazan los datos imposibles lanzando una excepcion. Aqui
+		// se convierten en un mensaje en vez de en una traza roja. Los numeros mal
+		// escritos caen en el mismo sitio: NumberFormatException, la que lanza
+		// Integer.parseInt, tambien es una IllegalArgumentException
+		try {
+			mostrarInformacion(crearPersonas(sc));
+		} catch (IllegalArgumentException e) {
+			System.out.println("Datos no validos: " + e.getMessage());
+		}
+
+		sc.close();
+	}
+
+	// Pide por teclado los datos de las tres personas y las crea.
+	private static Person[] crearPersonas(Scanner sc) {
 		String[] nombres = new String[NUM_PERSONAS];
 		int[] edades = new int[NUM_PERSONAS];
 		Sexo[] sexos = new Sexo[NUM_PERSONAS];
@@ -35,15 +50,16 @@ public class Main {
 			if ("hombre".equalsIgnoreCase(sc.nextLine().trim())) {
 				sexos[i] = Sexo.HOMBRE;
 			}
-			pesos[i] = leerPositivo(sc, "Peso en kg: ");
-			alturas[i] = leerPositivo(sc, "Altura en m: ");
+			System.out.print("Peso en kg: ");
+			pesos[i] = Double.parseDouble(sc.nextLine().trim());
+			System.out.print("Altura en m: ");
+			alturas[i] = Double.parseDouble(sc.nextLine().trim());
 
 			if (i >= PRIMERA_CON_DNI) {
 				System.out.print("DNI (numero, numero+letra, o vacio para generarlo): ");
 				dnis[i] = leerDni(sc.nextLine());
 			}
 		}
-		sc.close();
 
 		// Los tres constructores de Person: el vacio, el de nombre+edad+DNI+sexo
 		// y el completo. Los valores que el constructor no asigna van por setters
@@ -60,8 +76,11 @@ public class Main {
 
 		Person p3 = new Person(nombres[2], edades[2], dnis[2], sexos[2], pesos[2], alturas[2]);
 
-		Person[] personas = { p1, p2, p3 };
+		return new Person[] { p1, p2, p3 };
+	}
 
+	// Muestra el estado de peso, quien es mayor de edad y la ficha de cada uno.
+	private static void mostrarInformacion(Person[] personas) {
 		for (Person persona : personas) {
 			mostrarEstadoPeso(persona);
 		}
@@ -90,30 +109,12 @@ public class Main {
 		System.out.println(persona.getNombre() + " esta en su peso ideal.");
 	}
 
-	// Pide un numero hasta que sea mayor que 0: con un peso o una altura de 0
-	// el IMC no da un numero y la persona quedaria mal clasificada.
-	private static double leerPositivo(Scanner sc, String mensaje) {
-		double valor;
-		do {
-			System.out.print(mensaje);
-			valor = Double.parseDouble(sc.nextLine().trim());
-
-			if (valor <= 0) {
-				System.out.println("Escriba un numero mayor que 0.");
-			}
-		} while (valor <= 0);
-
-		return valor;
-	}
-
+	// Sin texto se genera un DNI al azar. Con texto decide DNI, que sabe si es
+	// un DNI valido y lanza la excepcion si no lo es
 	private static DNI leerDni(String texto) {
-		String limpio = texto.trim();
-		if (limpio.isEmpty()) {
+		if (texto.trim().isEmpty()) {
 			return new DNI();
 		}
-		if (Character.isLetter(limpio.charAt(limpio.length() - 1))) {
-			return new DNI(limpio);
-		}
-		return new DNI(Integer.parseInt(limpio));
+		return new DNI(texto);
 	}
 }

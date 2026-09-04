@@ -27,20 +27,24 @@ public class Person {
 	// Unico constructor que no recibe DNI: genera uno al azar. El resto lo pide,
 	// porque la clase no ofrece setDni y despues ya no se podria asignar
 	public Person() {
-		this("", 0, new DNI(), Sexo.MUJER, 0, 0);
+		this("", 0, new DNI(), Sexo.MUJER);
 	}
 
+	// Peso y altura se quedan en 0, el valor por defecto de un double, hasta que
+	// se asignen con sus setters
 	public Person(String nombre, int edad, DNI dni, Sexo sexo) {
-		this(nombre, edad, dni, sexo, 0, 0);
-	}
-
-	public Person(String nombre, int edad, DNI dni, Sexo sexo, double peso, double altura) {
 		this.nombre = nombre;
 		this.edad = edad;
 		this.dni = dni;
 		this.sexo = sexo;
-		this.peso = peso;
-		this.altura = altura;
+	}
+
+	// El peso y la altura entran por los setters para comprobarlos en un unico
+	// sitio, sea cual sea el constructor por el que llegue la persona
+	public Person(String nombre, int edad, DNI dni, Sexo sexo, double peso, double altura) {
+		this(nombre, edad, dni, sexo);
+		setPeso(peso);
+		setAltura(altura);
 	}
 
 	public String getNombre() {
@@ -75,7 +79,11 @@ public class Person {
 		return peso;
 	}
 
+	// Un peso de 0 o negativo no existe, y ademas falsearia el IMC
 	public void setPeso(double peso) {
+		if (peso <= 0) {
+			throw new IllegalArgumentException("El peso debe ser mayor que 0");
+		}
 		this.peso = peso;
 	}
 
@@ -83,15 +91,24 @@ public class Person {
 		return altura;
 	}
 
+	// Una altura de 0 o negativa no existe, y ademas falsearia el IMC
 	public void setAltura(double altura) {
+		if (altura <= 0) {
+			throw new IllegalArgumentException("La altura debe ser mayor que 0");
+		}
 		this.altura = altura;
 	}
 
-	// IMC = peso (kg) / altura al cuadrado (m). Ojo: con una altura de 0 (el valor
-	// por defecto) la division no da un numero, sino NaN o infinito, y entonces
-	// evaluateWeight() devuelve una categoria sin sentido. Por eso quien crea la
-	// persona debe darle siempre una altura mayor que 0
+	// IMC = peso (kg) / altura al cuadrado (m).
+	//
+	// Con el peso o la altura todavia a 0 la division no da un numero, sino NaN o
+	// infinito, y evaluateWeight() clasificaria a la persona sin sentido. Como no
+	// es culpa de quien llama, sino de una persona a medio rellenar, la excepcion
+	// es IllegalStateException y no IllegalArgumentException
 	public double computeBMI() {
+		if (peso <= 0 || altura <= 0) {
+			throw new IllegalStateException("Falta el peso o la altura de " + nombre);
+		}
 		return peso / (altura * altura);
 	}
 

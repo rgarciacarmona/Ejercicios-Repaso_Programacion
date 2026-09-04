@@ -9,6 +9,9 @@ public class DNI {
 	private static final int MODULO = 23;
 	private static final int NUMERO_MAX = 99999999;
 
+	// Hasta 8 digitos y, opcionalmente, la letra: "12345678" o "12345678Z"
+	private static final String PATRON = "\\d{1,8}[A-Z]?";
+
 	private int numero;
 	private char letra;
 
@@ -26,15 +29,29 @@ public class DNI {
 		this.letra = letraNormalizada;
 	}
 
+	// Acepta el numero solo o el numero con su letra. Cualquier otra cosa se
+	// rechaza aqui, con un mensaje que dice que pasa, en vez de dejar que reviente
+	// Integer.parseInt con un "For input string" que no ayuda a nadie
 	public DNI(String dniCompleto) {
 		String texto = dniCompleto.trim().toUpperCase();
-		int numeroTexto = Integer.parseInt(texto.substring(0, texto.length() - 1));
-		char letraTexto = texto.charAt(texto.length() - 1);
-		if (letraTexto != calcularLetra(numeroTexto)) {
+		if (!texto.matches(PATRON)) {
+			throw new IllegalArgumentException("DNI mal escrito: " + dniCompleto);
+		}
+
+		boolean traeLetra = Character.isLetter(texto.charAt(texto.length() - 1));
+		String digitos = texto;
+		if (traeLetra) {
+			digitos = texto.substring(0, texto.length() - 1);
+		}
+
+		int numeroTexto = Integer.parseInt(digitos);
+		char letraCalculada = calcularLetra(numeroTexto);
+		if (traeLetra && texto.charAt(texto.length() - 1) != letraCalculada) {
 			throw new IllegalArgumentException("Letra no compatible con el numero de DNI");
 		}
+
 		this.numero = numeroTexto;
-		this.letra = letraTexto;
+		this.letra = letraCalculada;
 	}
 
 	public DNI() {

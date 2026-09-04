@@ -222,23 +222,6 @@ Además de lo anterior, para cada uno de los ejercicios siguientes, escriba un p
     \item Elimine los elementos duplicados de las \code{Lists} de \code{floats} de un \code{Set} de \code{Measurements}.
 \end{enumerate}
 
-\section{Manejo de archivos}
-
-Para cada uno de los ejercicios siguientes, escriba un programa que...
-
-\begin{enumerate}
-    \item Lea un archivo de texto línea por línea y muestre el contenido por pantalla.
-    \item Almacene un array de \code{floats} en un archivo, sobreescribiéndolo.
-    \item Añada 3 línes de texto escritas por el usuario al final de un archivo.
-    \item Copie el contenido de un archivo a otro.
-    \item Cuenta las líneas de un archivo.
-    \item Comprueba si un archivo existe antes de leerlo.
-    \item Cree un directorio (también llamado carpeta).
-    \item Liste todos los archivos con la extensión ``.txt'' de un directorio.
-    \item Obtenga el tamaño de un archivo en bytes.
-    \item Combine el contenido de dos archivos en un tercero, concatenándolos.
-\end{enumerate}
-
 \section{Programación orientada a objetos}
 \label{sec:poo}
 
@@ -267,49 +250,6 @@ Para la mayoría de los siguientes ejercicios deberá decidir usted mismo el tip
     
     Usando esta clase, cree una calculadora que permita operar con números racionales, seleccionando las operaciones de un menú.
     
-    \item Programe una clase llamada \code{Person} con atributos que representen su nombre, edad, DNI, sexo (use un enum), peso y altura. Cree métodos para acceder y modificar todos los atributos excepto el DNI, al que solo deberá permitirse el acceso, no la modificación.
-    
-    Por defecto, todos los atributos menos el DNI tendrán valores según su tipo (\code{0} en el caso de números, una cadena vacía en el caso de \code{Strings}, etc.). Sexo será ``mujer'' por defecto.
-    
-    La clase deberá tener los siguientes constructores:
-    
-    \begin{itemize}
-        \item Un constructor por defecto sin argumentos. Como el DNI no se puede modificar más tarde, este constructor generará uno cualquiera usando el constructor sin argumentos de la clase \code{DNI}.
-        \item Un constructor que reciba el nombre, la edad, el DNI y el sexo.
-        \item Un constructor que reciba todos los atributos.
-    \end{itemize}
-
-    La clase deberá tener los siguientes métodos:
-
-    \begin{itemize}
-        \item \code{computeBMI()}: calcula el índice de masa corporal (\textit{body mass index}, BMI) de la persona. La fórmula es la siguiente: $peso / (altura^2)$. La altura deberá estar especificada en metros y el peso en kilogramos.
-        \item \code{evaluateWeight()}: devuelve un enum que indica si el individuo está por debajo de su peso ideal, en su peso ideal o tiene sobrepeso. Sobrepeso se define como  un BMI mayor a 25, y se considera que alguien está por debajo del peso ideal si su BMI es menor a 18.
-        \item \code{isAdult()}: indica si es mayor de edad, devolviendo un \code{boolean}.
-        \item \code{toString()}: devuelve toda la información de la persona como una cadena de caracteres.
-        \item Métodos \textit{getter} de cada atributo, y métodos \textit{setter} de cada atributo excepto el DNI.
-    \end{itemize}
-
-    El DNI deberá estar representado a través de una clase DNI, que deberá contener:
-
-    \begin{itemize}
-        \item Un constructor que recibe el número. La letra se generará automáticamente, \href{https://www.letranif.com/}{siguiendo la fórmula oficial}, a partir del número.
-        \item Un constructor que recibe el número y la letra. No se deberá permitir crear un DNI cuya letra no sea compatible con el número.
-        \item Un constructor que recibe un \code{String} que contiene el número y la letra, uno tras otro y sin separación entre ellos. No se deberá permitir crear un DNI cuya letra no sea compatible con el número.
-        \item Un constructor por defecto sin argumentos, que genere un DNI cualquiera que sea válido.
-    \end{itemize}
-
-    Esta clase, además, deberá contener el método \code{toString()}, que devolverá una cadena de caracteres que representará el DNI.
-
-    Por último, cree una clase que se pueda ejecutar que haga lo siguiente, en orden:
-
-    \begin{enumerate}
-        \item Pida al usuario que escriba el nombre, edad, sexo, peso y altura de tres personas, así como el número de DNI de aquellas que vaya a crear con un constructor que lo reciba. Deberá aceptarse simplemente el número, el número y la letra, o nada (el número de DNI se generará usando el constructor sin argumentos de esa clase).
-        \item Cree 3 objetos de la clase \code{Person}. Utilice tres tipos de constructores distintos y emplee los métodos \textit{setters} para asignar los valores que posea y que el constructor no haya asignado ya.
-        \item Para cada persona, compruebe si está en su peso ideal, tiene sobrepeso o está por debajo de su peso ideal y comunique esta información a través de un mensaje personalizado.
-        \item Escriba un mensaje en el que se indique cuáles de las personas son mayores de edad.
-        \item Para terminar, muestre por pantalla la información completa de cada persona.
-    \end{enumerate}
-
     \item Programe una clase \code{Password} que tenga los atributos \code{longitud} y \code{password}. Si no se especifica una \code{longitud} al crear un objeto de la clase \code{Password}, esta deberá ser 8. Los constructores serán los siguientes:
 
     \begin{itemize}
@@ -374,6 +314,68 @@ contraseña2 : valor_bololeano2
     \item Incluya en cualquiera de los métodos \code{main} que ha ido programando hasta ahora una clásula \code{finally} que capture cualquier excepción que se haya propagado hasta el \code{main} y, en lugar de mostrarla, muestre al usuario un mensaje pidiendo perdón humildemente.
     \item Cree una clase propia llamada \code{InvalidMeasurementException} que extienda \code{Exception} y se use para cualquier error relacionado con los \code{Measurements} de los ejercicios de la sección \ref{sec:listas}.
 
+    \item Programe una clase llamada \code{Person} con atributos que representen su nombre, edad, DNI, sexo (use un enum), peso y altura. Cree métodos para acceder y modificar todos los atributos excepto el DNI, al que solo deberá permitirse el acceso, no la modificación.
+    
+    Por defecto, todos los atributos menos el DNI tendrán valores según su tipo (\code{0} en el caso de números, una cadena vacía en el caso de \code{Strings}, etc.). Sexo será ``mujer'' por defecto.
+    
+    La clase deberá tener los siguientes constructores:
+    
+    \begin{itemize}
+        \item Un constructor por defecto sin argumentos. Como el DNI no se puede modificar más tarde, este constructor generará uno cualquiera usando el constructor sin argumentos de la clase \code{DNI}.
+        \item Un constructor que reciba el nombre, la edad, el DNI y el sexo.
+        \item Un constructor que reciba todos los atributos.
+    \end{itemize}
+
+    La clase deberá tener los siguientes métodos:
+
+    \begin{itemize}
+        \item \code{computeBMI()}: calcula el índice de masa corporal (\textit{body mass index}, BMI) de la persona. La fórmula es la siguiente: $peso / (altura^2)$. La altura deberá estar especificada en metros y el peso en kilogramos.
+        \item \code{evaluateWeight()}: devuelve un enum que indica si el individuo está por debajo de su peso ideal, en su peso ideal o tiene sobrepeso. Sobrepeso se define como  un BMI mayor a 25, y se considera que alguien está por debajo del peso ideal si su BMI es menor a 18.
+        \item \code{isAdult()}: indica si es mayor de edad, devolviendo un \code{boolean}.
+        \item \code{toString()}: devuelve toda la información de la persona como una cadena de caracteres.
+        \item Métodos \textit{getter} de cada atributo, y métodos \textit{setter} de cada atributo excepto el DNI.
+    \end{itemize}
+
+    El DNI deberá estar representado a través de una clase DNI, que deberá contener:
+
+    \begin{itemize}
+        \item Un constructor que recibe el número. La letra se generará automáticamente, \href{https://www.letranif.com/}{siguiendo la fórmula oficial}, a partir del número.
+        \item Un constructor que recibe el número y la letra. No se deberá permitir crear un DNI cuya letra no sea compatible con el número.
+        \item Un constructor que recibe un \code{String} que contiene el número y la letra, uno tras otro y sin separación entre ellos. No se deberá permitir crear un DNI cuya letra no sea compatible con el número.
+        \item Un constructor por defecto sin argumentos, que genere un DNI cualquiera que sea válido.
+    \end{itemize}
+
+    Esta clase, además, deberá contener el método \code{toString()}, que devolverá una cadena de caracteres que representará el DNI.
+
+    Emplee excepciones para impedir que se cree un DNI cuya letra no sea compatible con el número.
+
+    Por último, cree una clase que se pueda ejecutar que haga lo siguiente, en orden:
+
+    \begin{enumerate}
+        \item Pida al usuario que escriba el nombre, edad, sexo, peso y altura de tres personas, así como el número de DNI de aquellas que vaya a crear con un constructor que lo reciba. Deberá aceptarse simplemente el número, el número y la letra, o nada (el número de DNI se generará usando el constructor sin argumentos de esa clase).
+        \item Cree 3 objetos de la clase \code{Person}. Utilice tres tipos de constructores distintos y emplee los métodos \textit{setters} para asignar los valores que posea y que el constructor no haya asignado ya.
+        \item Para cada persona, compruebe si está en su peso ideal, tiene sobrepeso o está por debajo de su peso ideal y comunique esta información a través de un mensaje personalizado.
+        \item Escriba un mensaje en el que se indique cuáles de las personas son mayores de edad.
+        \item Para terminar, muestre por pantalla la información completa de cada persona.
+    \end{enumerate}
+
+\end{enumerate}
+
+\section{Manejo de archivos}
+
+Para cada uno de los ejercicios siguientes, escriba un programa que...
+
+\begin{enumerate}
+    \item Lea un archivo de texto línea por línea y muestre el contenido por pantalla.
+    \item Almacene un array de \code{floats} en un archivo, sobreescribiéndolo.
+    \item Añada 3 línes de texto escritas por el usuario al final de un archivo.
+    \item Copie el contenido de un archivo a otro.
+    \item Cuenta las líneas de un archivo.
+    \item Comprueba si un archivo existe antes de leerlo.
+    \item Cree un directorio (también llamado carpeta).
+    \item Liste todos los archivos con la extensión ``.txt'' de un directorio.
+    \item Obtenga el tamaño de un archivo en bytes.
+    \item Combine el contenido de dos archivos en un tercero, concatenándolos.
 \end{enumerate}
 
 Enhorabuenba, ha hecho un montón de ejercicios. Descanse, se lo ha ganado.

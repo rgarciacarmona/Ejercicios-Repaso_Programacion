@@ -1,0 +1,382 @@
+\documentclass[a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{etoolbox}
+\usepackage{graphicx}
+\usepackage{framed}
+\usepackage{epstopdf}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{cancel}
+\usepackage{tabularx}
+\usepackage{tabu}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{verbatim}
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning,calc,shapes.geometric}
+\graphicspath{ {images/}{Exercises/images/}{Header/} }
+\providetoggle{showAnswers}
+\providetoggle{eachProblemInOnePage}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage[export]{adjustbox}
+\usepackage{caption}
+\usepackage{colortbl} 
+\usepackage{dashrule} 
+\usepackage{fancyhdr}
+\usepackage[bmargin=2cm,footnotesep=1cm,tmargin=2cm]{geometry} 
+\usepackage[pdftex,colorlinks,a4paper,backref,bookmarks=true,bookmarksnumbered=true,linkcolor=blue,urlcolor=blue,citecolor=blue]{hyperref}
+\usepackage[section]{placeins}
+\usepackage[labelsep=quad,indention=10pt]{subfig}
+\usepackage[spanish,shadow,textsize=small]{todonotes}
+\usepackage{wrapfig}
+\usepackage{karnaugh-map}
+
+% Código fuente
+\newcommand{\code}[1]{\texttt{#1}}
+
+% Minted
+\usepackage{minted}
+% Optional: Set a default style. 'manni' is a light, clean style.
+% Other popular styles include 'tango', 'monokai', 'solarized-light'.
+\usemintedstyle{sas}
+
+% Cajas de respuestas
+\newcommand{\overflowbox}[1]{%
+    \enlargethispage{\textheight}
+    \nobreak
+    \noindent
+    \fbox{%
+        \parbox{\textwidth}{%
+            \rule{0pt}{#1}%
+        }%
+    }%
+}
+
+% Caja sombreado
+% comando \sombreado{Título}{Texto}
+\definecolor{shadecolor}{rgb}{0.9,0.9,0.9}
+\newcommand{\sombreado}[2]{
+  \begin{shaded}
+    \begin{center} \emph{\textsc{#1}} \end{center}
+    \noindent #2\\
+  \end{shaded}
+}
+
+
+% PARAMETROS CONFIGURABLES
+\newcommand{\asig}{Análisis y Diseño de Software}
+\newcommand{\grado}{Grado en Ingeniería de Tecnologías y Servicios de Telecomunicación}
+\newcommand{\ceu}{Universidad Politécnica de Madrid}
+\newcommand{\autor}{Rodrigo García Carmona}
+\newcommand{\email}{\href{mailto:rodrigo.garcia@upm.es}{rodrigo.garcia@upm.es}}
+\newcommand{\titulo}{ADSW - Ejercicios repaso PROG}
+
+% PDF
+\hypersetup{
+  pdfauthor={\autor},
+  pdftitle={\titulo},
+  pdfsubject={\asig, \grado, \ceu}, 
+  pdftoolbar=true,
+  pdfmenubar=true,
+  pdffitwindow=true,
+  pdfnewwindow=true
+}
+
+% ENCABEZADO
+\pagestyle{fancy}%
+  \renewcommand{\headrulewidth}{0.1pt}
+  \renewcommand{\footrulewidth}{0.1pt}
+  \fancyhf{}
+  \fancyhead[L]{\includegraphics[width=8mm]{templates/ETSIT-UPM.eps}}
+  \fancyhead[C]{\small{\asig}\\\small{\grado}}
+  \fancyfoot[L]{}
+  \fancyfoot[C]{\thepage}
+  \fancyfoot[R]{}
+
+% CONTENIDO
+\begin{document}
+
+\input{titlepage.tex}
+
+\section{Introducción}
+
+A continuación encontrará los enunciados de una serie de ejercicios que le servirán para practicar. Estos ejercicios están clasificados por categorías.
+
+Para cada ejercicio, aunque no se especifique, no deje de tener en cuenta que:
+
+\begin{itemize}
+    \item Debe considerar los casos límite o problemáticos como arrays vacíos, valores \code{null}, índices fuera de rango...
+    \item El código debe ser eficiente: si es posible evitar un bucle, ahorrar vueltas dentro de un bucle o reducir el número de líneas a ejecutar, es mejor hacerlo.
+    \item Lo programado debe ser legible, intentando que el código sea fácil de entender y acompañándolo de comentarios completos pero concisos.
+    \item Puede organizar su código en paquetes y clases, así como reutilizar métodos ya creados. Un buen método debería caber en una única pantalla.
+\end{itemize}
+
+Además, no deje de probar su código. No se limite a ver que compila o que funciona con una entrada de datos trivial.
+
+\section{Tipos de datos y sentencias de control}
+
+Para cada uno de los ejercicios siguientes, escriba un programa que...
+
+\begin{enumerate}
+    \item Defina variables que representen el número de días de un año, el número de horas que tiene un día, el número de minutos que tiene una hora y el número de segundos que tiene un minuto. Emplee las variables que ocupen el mínimo espacio de memoria posible. A continuación, calcule el número de segundos que tiene un año y almacene el valor de dicho cálculo en otra variable.
+    \item Muestre por pantalla los mayores números enteros que se pueden representar mediante un \code{char}, un \code{short} y un \code{int}.
+    \item Calcule la suma de todos los múltiplos de 5 comprendidos entre 1 y 100. También debe calcular cuántos hay y mostrar visualizar cada uno de ellos.
+    \item Calcule el mínimo y el máximo de una serie de números enteros positivos introducidos por el usuario. Cuando el usuario introduzca un número negativo se considerará que el anterior a este es el último número.
+    \item Muestre por pantalla la tabla de multiplicar de los 10 primeros números naturales.
+    \item Muestre por pantalla la lista de los 100 primeros números primos.
+    \item Tome un número entero escrito por el usuario y lo descomponga en factores primos. Por ejemplo: $40 = 2 \times 2 \times 2 \times 5$.
+    \item Solicite al usuario dos vectores tridimensionales e imprima su producto escalar.
+\end{enumerate}
+
+\section{Arrays}
+\label{sec:arrays}
+
+Para cada uno de los ejercicios siguientes, escriba un programa que...
+
+\begin{enumerate}
+    \item Tome un array de \code{floats} y devuelva la suma de todos sus elementos.
+    \item Busque un valor específico en un array de \code{ints} (no ordenado) y devuelva su posición, o \code{-1} si el valor no existe.
+    \item Genere un array de 300 enteros en el que cada posición contenga su índice módulo 16. Es decir, que siga la siguiente secuencia:
+
+\begin{minted}[
+frame=lines, % Adds a frame around the code
+framesep=2mm,
+% linenos % Enables line numbers
+]{java}
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0, 1, 2, ...
+\end{minted}
+
+    \item Haga lo mismo que el ejercicio anterior, pero ahora usando un array de \code{chars} con la representación en hexadecimal de los dígitos. Es decir, que siga la siguiente secuencia:
+
+\begin{minted}[
+frame=lines, % Adds a frame around the code
+framesep=2mm,
+% linenos % Enables line numbers
+]{java}
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F, 0, 1, 2, ...
+\end{minted}
+    
+    \item Dado un array de \code{floats}, devuelva el promedio de todos ellos.
+    \item Reciba una matriz (array bidimensional de \code{floats}, siguiendo el orden de primero fila y luego columna), y devuelva un array que contenga el valor máximo de cada fila.
+    \item Copie los elementos de un array de \code{ints} a otro, pero multiplicando cada valor por un factor fijo representado en forma de \code{int}.
+    \item Cuente el número de valores negativos que hay en un array de \code{floats}.
+    \item Invierta el orden de los elementos de un array de \code{chars}.
+    \item Haga lo mismo que el ejercicio anterior, pero sin usar arrays auxiliares. Solo puede emplear el array que recibe como argumento.
+    \item Pida al usuario números enteros hasta que se introduzca el número \code{0}. A continuación, calcule la media, el mínimo y el máximo de los datos introducidos.
+    \item Concatene dos arrays de \code{chars}.
+    \item Divida un array en segmentos (otros arrays) de un tamaño fijo especificado a través de un entero. Si el último segmento no llega al tamaño especificado, tendrá el tamaño inferior correspondiente. Por ejemplo, si debe dividir un array de 23 elementos en segmentos de tamaño 5, acabará teniendo 4 arrays de 5 elementos y 1 array de 3 elementos.
+    \item Normalice un array de \code{floats} para que todos los valores estén entre \code{-1} y \code{1}. Recuerde que normalizar es dividir cada uno de los valores por el valor máximo (en valor absoluto).
+    \item Reciba un array de \code{floats} y devuelva otro array que contenga solo aquellos elementos del array original que sean más grandes que su elemento inmediatamente anterior y su elemento inmediatamente posterior. Por ejemplo, este nuevo array contendrá el elemento de la posición \code{3} solo si este número es mayor que el de las posiciones \code{2} y \code{4}.
+    \item Rellene una matriz cuadrada (las dimensiones de la matriz serán un parámetro que se pida al usuario) con números aleatorios, de tal modo que la matriz sea simétrica. También debe mostrar la matriz por pantalla.
+    \item Implemente un filtro por umbral. Este filtro recibe un array de \textit{floats} y devuelve otro que solo contenga los elementos que superen un umbral dado (también en forma de \textit{float}).
+    \item Implemente un filtro de ventana deslizante. Este filtro recibe un array de \code{floats} y calcula la media móvil con una ventana de tamaño de un \code{int} que se pasa como argumento. Por ejemplo, la media móvil con una ventana de tamaño \code{3} tomará el elemento actual del array y los dos anteriores para calcular la media. La media móvil se devolverá como un array cuyo tamaño sea el del array original menos el tamaño de la ventana menos 1 (ya que, por ejemplo, con una ventana \code{3} no se podrán calcular medias para los dos primeros valores del array).
+    \item Implemente un proceso de submuestreo que recibirá un array de \code{ints}, que representa un conjunto de muestras, y un \code{int} que representa el nivel de submuestreo; es decir, cada cuántas muestras conservará una (por ejemplo: con un nivel de submuestreo 3, se conservará 1 de cada 3 muestras). El programa deberá devolver otro array de \code{ints} que contenga el resultado de realizar el submuestreo.
+    \item Implemente un proceso de interpolación que recibirá un array de \code{ints}, que representa un conjunto de muestras. El programa deberá devolver otro array de \code{ints} que contendrá todas las muestras del array inicial y que, además, entre cada dos muestras, habrá introducido una nueva con la media de estas dos.
+    \item Calcule, a partir de un array de \code{floats}, cuántos de sus elementos están más de 2 desviaciones estándar desviados de la media de todos los elementos del array.
+    \item Repita el ejercicio anterior, pero logrando que su programa permita usar tanto el punto (``.'') como la coma (``,'') como separador de decimales.
+    \item Multiplique dos matrices de enteros. Sus dimensiones y valores deben de solicitarse al usuario por teclado y tras realizar la multiplicación debe visualizarse en pantalla ambas matrices y el resultado de la multiplicación.
+\end{enumerate}
+
+\section{Manejo de Strings}
+
+Para cada uno de los ejercicios siguientes, escriba un programa que...
+
+\begin{enumerate}
+    \item Imprima por pantalla el primer número que aparezca en un \code{String}.
+    \item Indique cuántas veces aparecer un \code{char} en un \code{String}.
+    \item Elimine los espacios en blanco al final de un \code{String}.
+    \item Pase un \code{String} a TODO MAYÚSCULAS. Luego, a todo minúsculas.
+    \item Indique cuántas veces aparece un \code{String} dentro de otro \code{String}.
+    \item Reemplace puntos (``.'') por comas (``,'') en un \code{String}, y vicecersa.
+    \item Verifique que un \code{String} contiene un número con decimales válido. Se aceptarán tanto puntos (``.'') como comas (``,'') como separador decimal.
+    \item Tome una cadena de caracteres (que podrá contener cualquier carácter a excepción del salto de línea) y devuelva cuántas vocales contiene.
+    \item Tome una cadena de caracteres (que podrá contener cualquier carácter a excepción del salto de línea) y la escriba al revés.
+    \item Lea una cadena de caracteres de teclado e indique si es o no palíndroma (se lee igual de izquierda a derecha que de derecha a izquierda, sin tener en cuenta los espacios en blanco y las mayúsculas). Por ejemplo: "dábale arroz a la zorra el abad".
+
+\end{enumerate}
+
+\section{Conjuntos y listas}
+\label{sec:listas}
+
+Vuelva a programar todos los ejercicios de la sección \ref{sec:arrays}, pero ahora usando \code{Lists} o \code{Sets} en lugar de arrays.
+
+Además de lo anterior, para cada uno de los ejercicios siguientes, escriba un programa que...
+
+\begin{enumerate}
+    \item Cree un \code{Set} de \code{Measurements} (\code{Measurement} es una clase que contiene un \code{float[]} con 4 elementos) y añada 10 \code{Measurements} introducidos por el usuario.
+    \item Modifique la clase \code{Measurement} para añadir un método \code{toString()}.
+    \item Modifique la clase \code{Measurement} para que utilice una \code{List} de \code{floats} en lugar de un \code{float[]}. Modifique todo el código de la clase que sea necesario.
+    \item Busque en un \code{Set} de \code{Measurements} todos los \code{Measurements} que contengan al menos un \code{float} cuyos valores se encuentren entre dos \code{floats} proporcionados por el usuario y muestre estos \code{Measurements} por pantalla. Tenga en cuenta que esta clase \code{Measurement} debería ser la que modificó en los dos ejercicios anteriores.
+    \item Busque \code{Measurements} igual que en el ejercicio anterior, pero elimine los que cumplan el criterio en lugar de mostrarlos en pantalla.
+    \item Convierta un \code{Set} de \code{Measurements} en un array, y viceversa.
+    \item Combine dos \code{Sets} de \code{Measurements} en un tercero.
+    \item Elimine los elementos duplicados de las \code{Lists} de \code{floats} de un \code{Set} de \code{Measurements}.
+\end{enumerate}
+
+\section{Manejo de archivos}
+
+Para cada uno de los ejercicios siguientes, escriba un programa que...
+
+\begin{enumerate}
+    \item Lea un archivo de texto línea por línea y muestre el contenido por pantalla.
+    \item Almacene un array de \code{floats} en un archivo, sobreescribiéndolo.
+    \item Añada 3 línes de texto escritas por el usuario al final de un archivo.
+    \item Copie el contenido de un archivo a otro.
+    \item Cuenta las líneas de un archivo.
+    \item Comprueba si un archivo existe antes de leerlo.
+    \item Cree un directorio (también llamado carpeta).
+    \item Liste todos los archivos con la extensión ``.txt'' de un directorio.
+    \item Obtenga el tamaño de un archivo en bytes.
+    \item Combine el contenido de dos archivos en un tercero, concatenándolos.
+\end{enumerate}
+
+\section{Programación orientada a objetos}
+\label{sec:poo}
+
+Para la mayoría de los siguientes ejercicios deberá decidir usted mismo el tipo de dato a utilizar en los atributos de las clases. Escoja el que sea más apropiado.
+
+\begin{enumerate}
+    \item Cree una clase para representar un punto en tres dimensiones.
+    
+    Proporcione un constructor que inicialice los valores del punto al origen de coordenadas y otro que permita especificar las coordenadas del punto.
+    
+    Sobrescriba el método \code{toString()} para que muestre información sobre los puntos.
+    
+    Use la clase en un programa en el que se creen objetos que representen los puntos \code{(12, 13, 18)} y \code{(8, 14, 0)} y los muestres en pantalla de forma numérica (no gráfica).
+    
+    \item Cree una clase \code{MyDate} que almacene el día, el mes y el año de una fecha.
+    
+    Proporcione métodos para acceder a estos atributos, los llamados métodos \textit{getters} (\code{getDay()}, \code{getMonth()} y \code{getYear()}), y para modificarlos, los llamados métodos \textit{setters} (\code{setDay(int day)}, \code{setMonth(int month)} y \code{setYear(int year)}).
+    
+    Sobrescriba el método \code{toString()}.
+    
+    Cree la fecha \code{19/09/2025} y muéstrela por pantalla. Después, cambie el año a 2026 y muéstrela de nuevo por pantalla.
+    
+    \item Cree una clase que represente un número racional que permita, al menos, sumar, multiplicar y simplificar números racionales.
+    
+    Proporcione un constructor por defecto, un constructor de copia (esto es, un constructor al que se le pasa un objeto de la clase número racional y crea otro número racional idéntico), y otro que permita indicar los valores del numerador y del denominador por separado.
+    
+    Usando esta clase, cree una calculadora que permita operar con números racionales, seleccionando las operaciones de un menú.
+    
+    \item Programe una clase llamada \code{Person} con atributos que representen su nombre, edad, DNI, sexo (use un enum), peso y altura. Cree métodos para acceder y modificar todos los atributos excepto el DNI, al que solo deberá permitirse el acceso, no la modificación.
+    
+    Por defecto, todos los atributos menos el DNI tendrán valores según su tipo (\code{0} en el caso de números, una cadena vacía en el caso de \code{Strings}, etc.). Sexo será ``mujer'' por defecto.
+    
+    La clase deberá tener los siguientes constructores:
+    
+    \begin{itemize}
+        \item Un constructor por defecto sin argumentos.
+        \item Un constructor que reciba el nombre, la edad y el sexo.
+        \item Un constructor que reciba todos los atributos menos el DNI como parámetros.
+        \item Un constructor que reciba todos los atributos.
+    \end{itemize}
+
+    La clase deberá tener los siguientes métodos:
+
+    \begin{itemize}
+        \item \code{computeBMI()}: calcula el índice de masa corporal (\textit{body mass index}, BMI) de la persona. La fórmula es la siguiente: $peso / (altura^2)$. La altura deberá estar especificada en metros y el peso en kilogramos.
+        \item \code{evaluateWeight()}: devuelve un enum que indica si el individuo está por debajo de su peso ideal, en su peso ideal o tiene sobrepeso. Sobrepeso se define como  un BMI mayor a 25, y se considera que alguien está por debajo del peso ideal si su BMI es menor a 18.
+        \item \code{isAdult()}: indica si es mayor de edad, devolviendo un \code{boolean}.
+        \item \code{toString()}: devuelve toda la información de la persona como una cadena de caracteres.
+        \item Métodos \textit{getter} de cada atributo, y métodos \textit{setter} de cada atributo excepto el DNI.
+    \end{itemize}
+
+    El DNI deberá estar representado a través de una clase DNI, que deberá contener:
+
+    \begin{itemize}
+        \item Un constructor que recibe el número. La letra se generará automáticamente, \href{https://www.letranif.com/}{siguiendo la fórmula oficial}, a partir del número.
+        \item Un constructor que recibe el número y la letra. No se deberá permitir crear un DNI cuya letra no sea compatible con el número.
+        \item Un constructor que recibe un \code{String} que contiene el número y la letra, uno tras otro y sin separación entre ellos. No se deberá permitir crear un DNI cuya letra no sea compatible con el número.
+        \item Un constructor por defecto sin argumentos, que genere un DNI cualquiera que sea válido.
+    \end{itemize}
+
+    Esta clase, además, deberá contener el método \code{toString()}, que devolverá una cadena de caracteres que representará el DNI.
+
+    Por último, cree una clase que se pueda ejecutar que haga lo siguiente, en orden:
+
+    \begin{enumerate}
+        \item Pida al usuario que escriba el nombre, edad, sexo, peso y altura de tres personas, así como sus números de DNI. Deberá aceptarse simplemente el número, el número y la letra, o nada (el número de DNI se generará usando el constructor sin argumentos de este clase).
+        \item Cree 3 objetos de la clase \code{Person}. Utilice tres tipos de constructores distintos y emplee los métodos \textit{setters} para asignar los valores que posea y que el constructor no haya asignado ya.
+        \item Para cada persona, compruebe si está en su peso ideal, tiene sobrepeso o está por debajo de su peso ideal y comunique esta información a través de un mensaje personalizado.
+        \item Escriba un mensaje en el que se indique cuáles de las personas son mayores de edad.
+        \item Para terminar, muestre por pantalla la información completa de cada persona.
+    \end{enumerate}
+
+    \item Programe una clase \code{Password} que tenga los atributos \code{longitud} y \code{password}. Si no se especifica una \code{longitud} al crear un objeto de la clase \code{Password}, esta deberá ser 8. Los constructores serán los siguientes:
+
+    \begin{itemize}
+        \item Un constructor por defecto sin argumentos que tendrá como contraseña ``password''.
+        \item Un constructor al que se le proporcionará una longitud y que generará una contraseña alfanumérica aleatoria (investigue \code{Math.random}) con esa longitud.
+    \end{itemize}
+
+    Los métodos de esta clase serán:
+
+    \begin{itemize}
+        \item \code{isStrong()}: devuelve un \code{boolean} que indica si la contraseña es fuerte o no. Para que sea fuerte debe tener más de 2 mayúsculas, más de 1 minúscula y más de 5 números.
+        \item \code{generatePassword()}: genera una contraseña para el objeto con la longitud que se especificó al crearlo.
+        \item Métodos \textit{getter} para \code{longitud} y \code{password}.
+        \item Método \textit{setter} para \code{longitud}.
+
+    \end{itemize}
+
+    Ahora, cree una clase clase ejecutable que haga lo siguiente:
+
+    \begin{enumerate}
+        \item Cree un array de \code{Passwords} con el tamaño que el usuario indique.
+        \item Cree un bucle que cree un nuevo objeto \code{Password} para cada posición del array. El usuario deberá indicar la longitud de cada contraseña.
+        \item Cree otro array de \code{booleans} donde se almacene si el \code{Password} que se encuentra en la misma posición en el array de \code{Passwords} es o no fuerte.
+        \item Muestre por pantalla cada contraseña y si es o no fuerte, siguiendo este formato:
+
+\begin{minted}[
+frame=lines, % Adds a frame around the code
+framesep=2mm,
+% linenos % Enables line numbers
+]{java}
+contraseña1 : valor_booleano1
+contraseña2 : valor_bololeano2
+\end{minted}
+    \end{enumerate}
+
+    \item En una empresa todos los trabajadores tienen un sueldo base de 1000 €. Los jefes tienen un suplemento de 500 € por cada año que hayan sido jefes de la empresa, y los viajantes, además del sueldo base, cobran 300 € por viaje realizado.
+    
+    Cree una clase \code{Empleado} de la cual deriven las clases \code{Jefe} y \code{Viajante}.
+    
+    Creae una plantilla de una empresa con 2 jefes, 5 viajantes y 15 empleados, y muestre por pantalla sus respectivos salarios. Para determinar el número de viajes de los viajantes y la antigüedad de los jefes puedes generar números aleatorios entre 0 y 10. Emplee el polimorfismo de herencia.
+
+    \item Cree la clase \code{CuentaBancaria}, que deberá tener como atributos un nombre de titular, una fecha de apertura, un número de cuenta y un saldo (este último un \code{float}). La cuenta deberá tener un método para retirar dinero, otro para ingresar dinero y otro para transferir dinero a otra cuenta. De una cuenta no se podrá retirar nunca dinero (ni transferir) si la cantidad de dinero a retirar o transferir es mayor que el saldo.
+    
+    Cree una cuenta a plazo fijo, en la cual cuando se retira dinero de algún modo antes de una fecha de vencimiento (que será otro atributo de esta clase), además del dinero a retirar, se penaliza con un 5 \% adicional.
+    
+    Cree además una cuenta VIP, que tendrá un atributo adicional que es el saldo negativo máximo que puede tener. En las cuentas VIP uno podrá tener saldo negativo siempre que no se supere este valor.
+    
+    Por último, programe un clase con un método \code{main} que permita crear los tres tipos de cuentas, transferir dinero de unas a otras, ingresar dinero y retirar dinero. Almacene las cuentas en un array o una \code{List} y emplee polimorfismo de herencia.
+
+\end{enumerate}
+
+\section{Manejo de excepciones}
+
+\begin{enumerate}
+
+    \item Convierta un array de \code{Strings} con números con decimales en un array de \code{floats}, manejando errores.
+    \item Divida una línea de un \href{https://es.wikipedia.org/wiki/Valores_separados_por_comas}{archivo CSV} (con los valores separados por comas) en sus componentes usando \code{split()}. Si una línea no sigue el formato ``valor1, valor2, valor3, ...'', el programa debe lanzar una excepción.
+    \item Tome la clase que programó para el ejercicio 2 de la sección \ref{sec:poo} (\code{Mydate}), y modifíquela para que los valores introducidos para sus atributos (ya sea mediante constructores o mediante métodos \textit{setters}) se correspondan con una fecha posible. En caso de no ser válida, se lanzará una excepción.
+    
+    Cree la fecha 31/02/2025 y verifique que se lanza la excepción correspondiente. Compruebe que esto también sucede al invocar el método \code{setDay(35)}.
+    \item Pida al usuario que escriba números enteros y utilice \code{NumberFormatException} para, en vez de mostrar un error horrible en rojo y terminar el programa si la entrada no es válida, pedirle que, por favor, vuelva a introducir un número.
+    \item Incluya en cualquiera de los métodos \code{main} que ha ido programando hasta ahora una clásula \code{finally} que capture cualquier excepción que se haya propagado hasta el \code{main} y, en lugar de mostrarla, muestre al usuario un mensaje pidiendo perdón humildemente.
+    \item Cree una clase propia llamada \code{InvalidMeasurementException} que extienda \code{Exception} y se use para cualquier error relacionado con los \code{Measurements} de los ejercicios de la sección \ref{sec:listas}.
+
+\end{enumerate}
+
+Enhorabuenba, ha hecho un montón de ejercicios. Descanse, se lo ha ganado.
+
+\end{document}

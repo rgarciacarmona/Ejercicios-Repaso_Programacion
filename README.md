@@ -2,8 +2,10 @@
 
 Conjunto de ejercicios de repaso de programación (tipos de datos y
 sentencias de control, arrays, Strings, listas y conjuntos, archivos,
-programación orientada a objetos y excepciones), tema que se imparte
-en la asignatura Análisis y Diseño de Software (ADSW) del Grado en
+programación orientada a objetos y excepciones). El objetivo es
+refrescar los conocimientos para poder afrontar las asignaturas
+Algoritmos y Estructuras de Datos (ALED) del Grado en Ingeniería
+Biomédica y Análisis y Diseño de Software (ADSW) del Grado en
 Ingeniería de Tecnologías y Servicios de Telecomunicación.
 
 Este repositorio contiene las **soluciones** a los ejercicios, todas

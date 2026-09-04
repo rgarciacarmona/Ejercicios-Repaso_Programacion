@@ -28,6 +28,9 @@ public class Main {
 			}
 		}
 
-		return numero.length() > 0 ? numero.toString() : null;
+		if (numero.length() > 0) {
+			return numero.toString();
+		}
+		return null;
 	}
 }

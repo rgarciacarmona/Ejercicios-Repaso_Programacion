@@ -24,7 +24,10 @@ public class Main {
 
 		// El signo, si lo hay, solo puede ir al principio
 		char primero = texto.charAt(0);
-		int inicio = (primero == '+' || primero == '-') ? 1 : 0;
+		int inicio = 0;
+		if (primero == '+' || primero == '-') {
+			inicio = 1;
+		}
 
 		boolean tieneSeparador = false;
 		int digitos = 0;

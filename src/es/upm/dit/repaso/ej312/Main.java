@@ -14,8 +14,16 @@ public class Main {
 
 	// Concatena 'primero' y 'segundo'. Trata null como array vacío.
 	private static char[] concatenar(char[] primero, char[] segundo) {
-		int tamPrimero = primero == null ? 0 : primero.length;
-		int tamSegundo = segundo == null ? 0 : segundo.length;
+		int tamPrimero = 0;
+		if (primero != null) {
+			tamPrimero = primero.length;
+		}
+
+		int tamSegundo = 0;
+		if (segundo != null) {
+			tamSegundo = segundo.length;
+		}
+
 		char[] resultado = new char[tamPrimero + tamSegundo];
 
 		for (int i = 0; i < tamPrimero; i++) {

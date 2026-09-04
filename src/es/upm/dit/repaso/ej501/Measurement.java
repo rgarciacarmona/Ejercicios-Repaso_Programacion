@@ -13,8 +13,10 @@ public class Measurement {
 		this.valores = Arrays.copyOf(valores, valores.length);
 	}
 
+	// Se devuelve una copia: quien recibiera el array interno podría cambiar los
+	// valores de la medida, y el Set que la contuviera dejaría de encontrarla
 	public float[] getValores() {
-		return valores;
+		return Arrays.copyOf(valores, valores.length);
 	}
 
 	// Dos medidas con los mismos valores son la misma medida. Sin equals() ni

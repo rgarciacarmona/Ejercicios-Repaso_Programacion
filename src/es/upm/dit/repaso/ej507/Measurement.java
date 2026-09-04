@@ -14,8 +14,10 @@ public class Measurement {
 		this.valores = new ArrayList<>(valores);
 	}
 
+	// Se devuelve una copia: quien recibiera la lista interna podría cambiar los
+	// valores de la medida, y el Set que la contuviera dejaría de encontrarla
 	public List<Float> getValores() {
-		return valores;
+		return List.copyOf(valores);
 	}
 
 	@Override

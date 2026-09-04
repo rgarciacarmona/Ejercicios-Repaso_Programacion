@@ -21,22 +21,20 @@ public class Main {
 		System.out.println("Máximos por fila: " + maximos);
 	}
 
-	// Calcula el máximo de cada fila. Una fila vacía o null no aporta máximo.
+	// Calcula el máximo de cada fila: la posición i del resultado es el máximo de
+	// la fila i. Una fila vacía o null ocupa su sitio con un null, así que hay que
+	// recorrer el resultado con "for (Float valor : maximos)", nunca con float:
+	// un null no se puede convertir en float.
 	private static List<Float> maximosPorFila(List<List<Float>> matriz) {
 		List<Float> maximos = new ArrayList<>();
 		if (matriz == null) {
 			return maximos;
 		}
 		for (List<Float> fila : matriz) {
-			Float maximo = maximoFila(fila);
-
-			// Las filas sin máximo no aportan nada, así que no se añaden. Si se
-			// añadieran, la List devuelta tendría nulls y quien la recorriese con
-			// "for (float valor : maximos)" fallaría: null no se puede convertir
-			// en float
-			if (maximo != null) {
-				maximos.add(maximo);
-			}
+			// Saltarse las filas sin máximo adelantaría un puesto a todas las
+			// siguientes y el resultado dejaría de decir a qué fila pertenece cada
+			// máximo
+			maximos.add(maximoFila(fila));
 		}
 		return maximos;
 	}

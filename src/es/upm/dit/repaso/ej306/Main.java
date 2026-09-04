@@ -16,6 +16,7 @@ public class Main {
 				{ -1.0f, -5.0f, -3.0f },
 				{}
 		};
+		// Imprime NaN si la fila no tiene máximo por estar vacía
 		float[] maximos = maximosPorFila(matriz);
 		for (int i = 0; i < maximos.length; i++) {
 			System.out.println("Máximo fila " + i + ": " + maximos[i]);

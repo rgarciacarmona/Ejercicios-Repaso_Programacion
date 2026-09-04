@@ -14,9 +14,9 @@ public class Main {
 		Set<Measurement> medidas = crearMedidasEjemplo();
 		System.out.println("Antes: " + medidas);
 
-		// Una medida nunca cambia sus valores: se crean medidas nuevas. Cambiar
-		// los de una que ya está dentro del Set alteraría su hashCode y el Set
-		// dejaría de encontrarla
+		// Measurement no deja cambiar sus valores (no tiene setters y getValores()
+		// devuelve una copia), así que aquí se crean medidas nuevas: cambiar los de
+		// una que ya está en el Set alteraría su hashCode y dejaría de encontrarla
 		Set<Measurement> limpias = new HashSet<>();
 		for (Measurement medida : medidas) {
 			limpias.add(sinDuplicados(medida));

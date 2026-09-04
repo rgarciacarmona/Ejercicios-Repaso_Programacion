@@ -9,6 +9,9 @@ import java.util.Scanner;
  */
 public class Main {
 
+	// Lo que NFD deja donde había una "ñ": una "n" y la tilde suelta
+	private static final String ENE_NFD = "n\u0303";
+
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("Introduce una cadena: ");
@@ -26,11 +29,13 @@ public class Main {
 
 		// Quita tildes, espacios y mayúsculas para que "dábale arroz a la zorra
 		// el abad" se compare como "dabalearrozalazorraelabad".
-		// NFD separa cada letra de su tilde ("á" -> "a" + "´") y \p{M} borra la tilde
-		String limpio = Normalizer.normalize(texto, Normalizer.Form.NFD)
+		// NFD separa cada letra de su tilde ("á" -> "a" + "´") y \p{M} borra la tilde.
+		// La "ñ" no es una "n" con tilde, sino otra letra, así que se rehace antes
+		// de borrarlas: si no, "cañón" se compararía como "canon"
+		String limpio = Normalizer.normalize(texto.toLowerCase(), Normalizer.Form.NFD)
+				.replace(ENE_NFD, "ñ")
 				.replaceAll("\\p{M}", "")
-				.replaceAll("\\s", "")
-				.toLowerCase();
+				.replaceAll("\\s", "");
 
 		// Compara con su inverso
 		String inverso = new StringBuilder(limpio).reverse().toString();

@@ -1,6 +1,6 @@
-package es.upm.dit.repaso.ej707;
+package es.upm.dit.repaso.ej606;
 
-/** Ejercicio 7.7: cuenta VIP, permite saldo negativo hasta un limite. */
+/** Ejercicio 6.6: cuenta VIP, permite saldo negativo hasta un limite. */
 public class CuentaVIP extends CuentaBancaria {
 
 	private float saldoNegativoMax;

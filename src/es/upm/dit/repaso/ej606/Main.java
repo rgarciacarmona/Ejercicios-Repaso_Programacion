@@ -1,30 +1,30 @@
 package es.upm.dit.repaso.ej606;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * Ejercicio 6.6: Comprueba si un archivo existe antes de leerlo;
- * si no existe, muestra un mensaje en vez de fallar.
- */
+/** Ejercicio 6.6: crea cuentas de los 3 tipos y opera con ellas por polimorfismo. */
 public class Main {
 
-	private static final String RUTA_ARCHIVO = "datos.txt";
-
 	public static void main(String[] args) {
-		Path ruta = Path.of(RUTA_ARCHIVO);
+		CuentaBancaria normal = new CuentaBancaria("Ana", "ES-001", 1000f);
+		CuentaPlazoFijo plazoFijo = new CuentaPlazoFijo("Luis", "ES-002", 2000f, LocalDate.now().plusMonths(6));
+		CuentaVIP vip = new CuentaVIP("Marta", "ES-003", 500f, 1000f);
 
-		if (!Files.exists(ruta)) {
-			System.out.println("El archivo " + RUTA_ARCHIVO + " no existe.");
-			return;
-		}
+		List<CuentaBancaria> cuentas = new ArrayList<>();
+		cuentas.add(normal);
+		cuentas.add(plazoFijo);
+		cuentas.add(vip);
 
-		try {
-			String contenido = Files.readString(ruta);
-			System.out.println(contenido);
-		} catch (IOException e) {
-			System.out.println("Error al leer el archivo: " + e.getMessage());
+		normal.ingresar(200f);
+		plazoFijo.retirar(300f); // antes del vencimiento: aplica un 5% de penalizacion
+		vip.retirar(1200f); // deja la cuenta en descubierto, dentro del limite permitido
+		normal.transferir(150f, vip);
+		normal.retirar(-100f); // rechazada: retirar una cantidad negativa seria ingresar
+
+		for (CuentaBancaria cuenta : cuentas) {
+			System.out.println(cuenta);
 		}
 	}
 }

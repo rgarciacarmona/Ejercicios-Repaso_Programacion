@@ -1,6 +1,6 @@
-package es.upm.dit.repaso.ej803;
+package es.upm.dit.repaso.ej703;
 
-/** Ejercicio 8.3: fecha (día, mes, año) que valida ser una fecha real posible. */
+/** Ejercicio 7.3: fecha (día, mes, año) que valida ser una fecha real posible. */
 public class MyDate {
 
 	private int day;
@@ -27,7 +27,8 @@ public class MyDate {
 		return month;
 	}
 
-	// Cambiar solo el mes puede dejar una fecha imposible: 31/1 pasaría a 31/2
+	// Cambiar solo el mes puede dejar una fecha imposible: 31/1 pasaría a 31/2.
+	// Por eso el orden importa: para ir de 31/1 a 15/2 hay que bajar antes el día
 	public void setMonth(int month) {
 		validar(day, month, year);
 		this.month = month;

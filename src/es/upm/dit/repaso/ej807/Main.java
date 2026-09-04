@@ -1,11 +1,11 @@
-package es.upm.dit.repaso.ej607;
+package es.upm.dit.repaso.ej807;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
- * Ejercicio 6.7: Crea un directorio (carpeta) con un nombre de ejemplo.
+ * Ejercicio 8.7: Crea un directorio (carpeta) con un nombre de ejemplo.
  */
 public class Main {
 

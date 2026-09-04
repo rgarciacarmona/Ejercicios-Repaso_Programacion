@@ -1,29 +1,18 @@
 package es.upm.dit.repaso.ej705;
 
-import java.util.Scanner;
-
-/** Ejercicio 7.5: genera un array de Password con las longitudes pedidas al usuario. */
+/** Ejercicio 7.5: captura cualquier fallo con un mensaje amable en vez de la traza. */
 public class Main {
 
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-
-		System.out.print("Numero de contraseñas a generar: ");
-		int tamano = Integer.parseInt(sc.nextLine().trim());
-
-		Password[] contrasenas = new Password[tamano];
-		boolean[] fuertes = new boolean[tamano];
-
-		for (int i = 0; i < tamano; i++) {
-			System.out.print("Longitud de la contraseña " + (i + 1) + ": ");
-			int longitud = Integer.parseInt(sc.nextLine().trim());
-			contrasenas[i] = new Password(longitud);
-			fuertes[i] = contrasenas[i].isStrong();
-		}
-		sc.close();
-
-		for (int i = 0; i < tamano; i++) {
-			System.out.println(contrasenas[i].getPassword() + " : " + fuertes[i]);
+		try {
+			// Fallo provocado: el array tiene 3 posiciones (0, 1 y 2), así que
+			// leer la 5 lanza ArrayIndexOutOfBoundsException
+			int[] numeros = { 10, 20, 30 };
+			System.out.println("Valor: " + numeros[5]);
+		} catch (Exception e) {
+			System.out.println("Lo sentimos mucho, algo ha fallado inesperadamente.");
+		} finally {
+			System.out.println("Fin de la ejecución.");
 		}
 	}
 }

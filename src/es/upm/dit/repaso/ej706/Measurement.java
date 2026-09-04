@@ -1,10 +1,10 @@
-package es.upm.dit.repaso.ej806;
+package es.upm.dit.repaso.ej706;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Ejercicio 8.6: el Measurement de la sección 5, que ahora rechaza los valores
+ * Ejercicio 7.6: el Measurement de la sección 5, que ahora rechaza los valores
  * no válidos. Es aquí, y no en la sección 5, porque hasta ahora no se conocían
  * las excepciones: sin ellas un constructor no puede avisar de un error.
  */
@@ -22,8 +22,10 @@ public class Measurement {
 		this.valores = new ArrayList<>(valores);
 	}
 
+	// Se devuelve una copia: quien recibiera la lista interna podría cambiar los
+	// valores de una medida que ya se validó al crearla
 	public List<Float> getValores() {
-		return valores;
+		return List.copyOf(valores);
 	}
 
 	@Override

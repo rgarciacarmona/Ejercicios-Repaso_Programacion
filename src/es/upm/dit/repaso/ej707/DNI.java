@@ -1,8 +1,8 @@
-package es.upm.dit.repaso.ej704;
+package es.upm.dit.repaso.ej707;
 
 import java.util.Random;
 
-/** Ejercicio 7.4: DNI español con calculo y validacion de letra. */
+/** Ejercicio 7.7: DNI español con calculo y validacion de letra. */
 public class DNI {
 
 	private static final String LETRAS = "TRWAGMYFPDXBNJZSQVHLCKE";

@@ -1,8 +1,8 @@
-package es.upm.dit.repaso.ej707;
+package es.upm.dit.repaso.ej606;
 
 import java.time.LocalDate;
 
-/** Ejercicio 7.7: cuenta bancaria con ingreso, retirada y transferencia. */
+/** Ejercicio 6.6: cuenta bancaria con ingreso, retirada y transferencia. */
 public class CuentaBancaria {
 
 	private String titular;
@@ -47,8 +47,8 @@ public class CuentaBancaria {
 		destino.ingresar(cantidad);
 	}
 
-	// Sin esta comprobación, retirar(-500) aumentaría el saldo y
-	// transferir(-500, otra) vaciaría la cuenta de destino.
+	// Sin esta comprobación, retirar(-500) aumentaría el saldo en vez de bajarlo, y
+	// transferir(-500, otra) sacaría 500 del destino en lugar de ingresarlos.
 	// Es protected porque cada subclase reescribe retirar() y debe reutilizarla
 	protected boolean esCantidadValida(float cantidad) {
 		if (cantidad <= 0) {

@@ -1,30 +1,25 @@
 package es.upm.dit.repaso.ej804;
 
-import java.util.Scanner;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
-/** Ejercicio 8.4: pide enteros por teclado, repitiendo la petición si la entrada no es válida. */
+/**
+ * Ejercicio 8.4: Copia el contenido de un archivo a otro
+ * (rutas de ejemplo fijas en constantes).
+ */
 public class Main {
 
+	private static final String RUTA_ORIGEN = "origen.txt";
+	private static final String RUTA_DESTINO = "destino.txt";
+
 	public static void main(String[] args) {
-		Scanner teclado = new Scanner(System.in);
-
-		int numero = pedirEntero(teclado, "Introduce un número entero: ");
-		System.out.println("Número leído: " + numero);
-
-		teclado.close();
-	}
-
-	// Pide un entero repitiendo la petición hasta que la entrada sea válida.
-	private static int pedirEntero(Scanner teclado, String mensaje) {
-		while (true) {
-			System.out.print(mensaje);
-			String texto = teclado.nextLine();
-
-			try {
-				return Integer.parseInt(texto);
-			} catch (NumberFormatException e) {
-				System.out.println("Eso no es un número entero. Por favor, vuelve a introducirlo.");
-			}
+		try {
+			String contenido = Files.readString(Path.of(RUTA_ORIGEN));
+			Files.writeString(Path.of(RUTA_DESTINO), contenido);
+			System.out.println("Archivo copiado de " + RUTA_ORIGEN + " a " + RUTA_DESTINO);
+		} catch (IOException e) {
+			System.out.println("Error al copiar el archivo: " + e.getMessage());
 		}
 	}
 }

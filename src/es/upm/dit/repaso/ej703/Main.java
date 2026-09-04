@@ -1,78 +1,34 @@
 package es.upm.dit.repaso.ej703;
 
-import java.util.Scanner;
-
-/** Ejercicio 7.3: calculadora de racionales con las operaciones en un menu. */
+/** Ejercicio 7.3: comprueba que MyDate rechaza fechas y días no válidos. */
 public class Main {
 
-	private static final int SUMAR = 1;
-	private static final int MULTIPLICAR = 2;
-	private static final int SALIR = 3;
-
 	public static void main(String[] args) {
-		Scanner teclado = new Scanner(System.in);
-
-		// Los otros dos constructores, el vacio y el de copia, en una linea
-		Racional cero = new Racional();
-		System.out.println("Racional por defecto: " + cero + ", copia: " + new Racional(cero));
-
-		int opcion = SALIR;
-		do {
-			mostrarMenu();
-			opcion = leerEntero(teclado, "Opcion: ");
-			if (opcion == SUMAR || opcion == MULTIPLICAR) {
-				operar(teclado, opcion);
-			}
-		} while (opcion != SALIR);
-
-		teclado.close();
-		System.out.println("Hasta luego.");
-	}
-
-	private static void mostrarMenu() {
-		System.out.println();
-		System.out.println(SUMAR + ") Sumar");
-		System.out.println(MULTIPLICAR + ") Multiplicar");
-		System.out.println(SALIR + ") Salir");
-	}
-
-	// Pide dos racionales, aplica la operacion elegida y muestra el resultado,
-	// que el constructor de Racional ya devuelve simplificado.
-	private static void operar(Scanner teclado, int opcion) {
-		Racional r1 = leerRacional(teclado, "Primer racional");
-		Racional r2 = leerRacional(teclado, "Segundo racional");
-
-		if (opcion == SUMAR) {
-			System.out.println(r1 + " + " + r2 + " = " + r1.sumar(r2));
-			return;
+		try {
+			new MyDate(31, 2, 2025);
+			System.out.println("Error: no se lanzó excepción para 31/02/2025");
+		} catch (IllegalArgumentException e) {
+			System.out.println("Excepción esperada al crear 31/02/2025: " + e.getMessage());
 		}
-		System.out.println(r1 + " * " + r2 + " = " + r1.multiplicar(r2));
-	}
 
-	// Pide numerador y denominador hasta que formen un racional valido.
-	private static Racional leerRacional(Scanner teclado, String nombre) {
-		while (true) {
-			System.out.println(nombre + ":");
-			int numerador = leerEntero(teclado, "  Numerador: ");
-			int denominador = leerEntero(teclado, "  Denominador: ");
+		MyDate fecha = new MyDate(15, 6, 2025);
+		System.out.println("Fecha válida creada: " + fecha);
 
-			try {
-				return new Racional(numerador, denominador);
-			} catch (IllegalArgumentException e) {
-				System.out.println("  " + e.getMessage());
-			}
+		try {
+			fecha.setDay(35);
+			System.out.println("Error: no se lanzó excepción para setDay(35)");
+		} catch (IllegalArgumentException e) {
+			System.out.println("Excepción esperada al llamar setDay(35): " + e.getMessage());
 		}
-	}
 
-	// Pide un entero hasta que la entrada sea un numero.
-	private static int leerEntero(Scanner teclado, String mensaje) {
-		while (true) {
-			System.out.print(mensaje);
-			try {
-				return Integer.parseInt(teclado.nextLine().trim());
-			} catch (NumberFormatException e) {
-				System.out.println("Escriba un numero entero.");
-			}
+		// Un setter también puede romper la fecha sin usar un valor absurdo:
+		// el mes 2 es válido, pero no para un día 31
+		try {
+			new MyDate(31, 1, 2025).setMonth(2);
+			System.out.println("Error: no se lanzó excepción para setMonth(2) sobre 31/01/2025");
+		} catch (IllegalArgumentException e) {
+			System.out.println("Excepción esperada al llamar setMonth(2) sobre 31/01/2025: "
+					+ e.getMessage());
 		}
 	}
 }

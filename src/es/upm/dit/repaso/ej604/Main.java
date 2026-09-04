@@ -1,25 +1,29 @@
 package es.upm.dit.repaso.ej604;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.util.Scanner;
 
-/**
- * Ejercicio 6.4: Copia el contenido de un archivo a otro
- * (rutas de ejemplo fijas en constantes).
- */
+/** Ejercicio 6.4: genera un array de Password con las longitudes pedidas al usuario. */
 public class Main {
 
-	private static final String RUTA_ORIGEN = "origen.txt";
-	private static final String RUTA_DESTINO = "destino.txt";
-
 	public static void main(String[] args) {
-		try {
-			String contenido = Files.readString(Path.of(RUTA_ORIGEN));
-			Files.writeString(Path.of(RUTA_DESTINO), contenido);
-			System.out.println("Archivo copiado de " + RUTA_ORIGEN + " a " + RUTA_DESTINO);
-		} catch (IOException e) {
-			System.out.println("Error al copiar el archivo: " + e.getMessage());
+		Scanner sc = new Scanner(System.in);
+
+		System.out.print("Numero de contraseñas a generar: ");
+		int tamano = Integer.parseInt(sc.nextLine().trim());
+
+		Password[] contrasenas = new Password[tamano];
+		boolean[] fuertes = new boolean[tamano];
+
+		for (int i = 0; i < tamano; i++) {
+			System.out.print("Longitud de la contraseña " + (i + 1) + ": ");
+			int longitud = Integer.parseInt(sc.nextLine().trim());
+			contrasenas[i] = new Password(longitud);
+			fuertes[i] = contrasenas[i].isStrong();
+		}
+		sc.close();
+
+		for (int i = 0; i < tamano; i++) {
+			System.out.println(contrasenas[i].getPassword() + " : " + fuertes[i]);
 		}
 	}
 }

@@ -1,6 +1,6 @@
-package es.upm.dit.repaso.ej706;
+package es.upm.dit.repaso.ej605;
 
-/** Ejercicio 7.6: empleado base con sueldo fijo. */
+/** Ejercicio 6.5: empleado base con sueldo fijo. */
 public class Empleado {
 
 	protected static final double SUELDO_BASE = 1000;

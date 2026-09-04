@@ -1,23 +1,34 @@
 package es.upm.dit.repaso.ej605;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-/**
- * Ejercicio 6.5: Cuenta las líneas de un archivo y muestra el resultado.
- */
+/** Ejercicio 6.5: plantilla de empresa y sueldos calculados por polimorfismo. */
 public class Main {
 
-	private static final String RUTA_ARCHIVO = "datos.txt";
+	private static final int NUM_JEFES = 2;
+	private static final int NUM_VIAJANTES = 5;
+	private static final int NUM_EMPLEADOS = 15;
+	private static final int RANGO_ALEATORIO = 11; // genera valores de 0 a 10
 
 	public static void main(String[] args) {
-		try {
-			List<String> lineas = Files.readAllLines(Path.of(RUTA_ARCHIVO));
-			System.out.println("El archivo contiene " + lineas.size() + " líneas.");
-		} catch (IOException e) {
-			System.out.println("Error al leer el archivo: " + e.getMessage());
+		Random random = new Random();
+		List<Empleado> plantilla = new ArrayList<>();
+
+		for (int i = 1; i <= NUM_JEFES; i++) {
+			plantilla.add(new Jefe("Jefe" + i, random.nextInt(RANGO_ALEATORIO)));
+		}
+		for (int i = 1; i <= NUM_VIAJANTES; i++) {
+			plantilla.add(new Viajante("Viajante" + i, random.nextInt(RANGO_ALEATORIO)));
+		}
+		for (int i = 1; i <= NUM_EMPLEADOS; i++) {
+			plantilla.add(new Empleado("Empleado" + i));
+		}
+
+		// Polimorfismo: cada empleado calcula su sueldo con su propia formula
+		for (Empleado empleado : plantilla) {
+			System.out.println(empleado);
 		}
 	}
 }

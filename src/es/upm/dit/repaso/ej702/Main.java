@@ -1,13 +1,44 @@
 package es.upm.dit.repaso.ej702;
 
-/** Ejercicio 7.2: crea una fecha y cambia el año con el setter. */
+import java.util.Arrays;
+
+/** Ejercicio 7.2: separa una línea CSV en sus componentes, validando el formato. */
 public class Main {
 
-	public static void main(String[] args) {
-		MyDate fecha = new MyDate(19, 9, 2025);
-		System.out.println("Fecha: " + fecha);
+	private static final String SEPARADOR = ",";
 
-		fecha.setYear(2026);
-		System.out.println("Fecha tras cambiar el año: " + fecha);
+	public static void main(String[] args) {
+		String lineaValida = "Ana,25,Madrid";
+		String lineaHuecoEnMedio = "Ana,,25";
+		String lineaHuecoAlFinal = "Ana,25,Madrid,,";
+
+		procesar(lineaValida);
+		procesar(lineaHuecoEnMedio);
+		procesar(lineaHuecoAlFinal);
+	}
+
+	// Procesa una línea CSV mostrando sus componentes, o el error si el formato no es válido.
+	private static void procesar(String linea) {
+		try {
+			String[] campos = dividir(linea);
+			System.out.println("Línea \"" + linea + "\" -> " + Arrays.toString(campos));
+		} catch (FormatoCsvInvalidoException e) {
+			System.out.println("Error al procesar \"" + linea + "\": " + e.getMessage());
+		}
+	}
+
+	// Divide la línea por comas. Se considera inválida si queda algún campo vacío,
+	// ya que el formato esperado es "valor1,valor2,valor3,...".
+	private static String[] dividir(String linea) throws FormatoCsvInvalidoException {
+		// El límite -1 conserva los campos vacíos del final: sin él,
+		// "Ana,25,Madrid,," devolvería solo 3 campos y parecería correcta
+		String[] campos = linea.split(SEPARADOR, -1);
+
+		for (String campo : campos) {
+			if (campo.trim().isEmpty()) {
+				throw new FormatoCsvInvalidoException("campo vacío en la línea");
+			}
+		}
+		return campos;
 	}
 }

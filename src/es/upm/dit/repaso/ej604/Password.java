@@ -1,6 +1,6 @@
-package es.upm.dit.repaso.ej705;
+package es.upm.dit.repaso.ej604;
 
-/** Ejercicio 7.5: contraseña con longitud configurable y comprobacion de fortaleza. */
+/** Ejercicio 6.4: contraseña con longitud configurable y comprobacion de fortaleza. */
 public class Password {
 
 	private static final int LONGITUD_DEFECTO = 8;

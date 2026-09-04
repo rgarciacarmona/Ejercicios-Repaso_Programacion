@@ -1,34 +1,31 @@
 package es.upm.dit.repaso.ej706;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
-/** Ejercicio 7.6: plantilla de empresa y sueldos calculados por polimorfismo. */
+/** Ejercicio 7.6: crea un Measurement válido y captura el error al crear uno inválido. */
 public class Main {
 
-	private static final int NUM_JEFES = 2;
-	private static final int NUM_VIAJANTES = 5;
-	private static final int NUM_EMPLEADOS = 15;
-	private static final int RANGO_ALEATORIO = 11; // genera valores de 0 a 10
-
 	public static void main(String[] args) {
-		Random random = new Random();
-		List<Empleado> plantilla = new ArrayList<>();
-
-		for (int i = 1; i <= NUM_JEFES; i++) {
-			plantilla.add(new Jefe("Jefe" + i, random.nextInt(RANGO_ALEATORIO)));
-		}
-		for (int i = 1; i <= NUM_VIAJANTES; i++) {
-			plantilla.add(new Viajante("Viajante" + i, random.nextInt(RANGO_ALEATORIO)));
-		}
-		for (int i = 1; i <= NUM_EMPLEADOS; i++) {
-			plantilla.add(new Empleado("Empleado" + i));
+		try {
+			Measurement valido = new Measurement(Arrays.asList(1.5f, 2.5f, 3.5f));
+			System.out.println("Measurement válido creado: " + valido);
+		} catch (InvalidMeasurementException e) {
+			System.out.println("Error inesperado: " + e.getMessage());
 		}
 
-		// Polimorfismo: cada empleado calcula su sueldo con su propia formula
-		for (Empleado empleado : plantilla) {
-			System.out.println(empleado);
+		crearInvalido(Collections.emptyList());
+		crearInvalido(null);
+	}
+
+	// Intenta crear una medida que no cumple las condiciones y muestra el error.
+	private static void crearInvalido(List<Float> valores) {
+		try {
+			new Measurement(valores);
+			System.out.println("Error: no se lanzó excepción para " + valores);
+		} catch (InvalidMeasurementException e) {
+			System.out.println("Excepción esperada para " + valores + ": " + e.getMessage());
 		}
 	}
 }

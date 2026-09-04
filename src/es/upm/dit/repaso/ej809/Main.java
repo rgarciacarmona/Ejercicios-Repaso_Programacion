@@ -1,11 +1,11 @@
-package es.upm.dit.repaso.ej609;
+package es.upm.dit.repaso.ej809;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
- * Ejercicio 6.9: Obtiene el tamaño de un archivo en bytes y lo muestra.
+ * Ejercicio 8.9: Obtiene el tamaño de un archivo en bytes y lo muestra.
  */
 public class Main {
 

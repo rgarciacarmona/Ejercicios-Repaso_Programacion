@@ -1,6 +1,6 @@
-package es.upm.dit.repaso.ej704;
+package es.upm.dit.repaso.ej707;
 
-/** Ejercicio 7.4: persona con datos personales, IMC y DNI. */
+/** Ejercicio 7.7: persona con datos personales, IMC y DNI. */
 public class Person {
 
 	/** Sexo de la persona. */

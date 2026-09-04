@@ -1,4 +1,4 @@
-package es.upm.dit.repaso.ej608;
+package es.upm.dit.repaso.ej808;
 
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
- * Ejercicio 6.8: Lista todos los archivos con extensión ".txt" de un directorio.
+ * Ejercicio 8.8: Lista todos los archivos con extensión ".txt" de un directorio.
  */
 public class Main {
 

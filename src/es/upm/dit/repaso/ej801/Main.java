@@ -1,40 +1,26 @@
 package es.upm.dit.repaso.ej801;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
-/** Ejercicio 8.1: convierte un array de Strings con decimales en un array de floats. */
+/**
+ * Ejercicio 8.1: Lee un archivo de texto línea por línea y muestra el contenido
+ * por pantalla.
+ */
 public class Main {
 
+	private static final String RUTA_ARCHIVO = "datos.txt";
+
 	public static void main(String[] args) {
-		String[] textos = { "3.14", "2.5", "abc", "10", "-7.2", "" };
-
-		float[] valores = convertir(textos);
-
-		System.out.print("Valores convertidos: ");
-		for (float valor : valores) {
-			System.out.print(valor + " ");
-		}
-		System.out.println();
-	}
-
-	// Convierte cada texto a float. Si un texto no es un número válido,
-	// se avisa por consola y se omite (no se incluye en el array resultado).
-	private static float[] convertir(String[] textos) {
-		List<Float> validos = new ArrayList<>();
-
-		for (String texto : textos) {
-			try {
-				validos.add(Float.parseFloat(texto));
-			} catch (NumberFormatException e) {
-				System.out.println("Valor no válido, se omite: \"" + texto + "\"");
+		try {
+			List<String> lineas = Files.readAllLines(Path.of(RUTA_ARCHIVO));
+			for (String linea : lineas) {
+				System.out.println(linea);
 			}
+		} catch (IOException e) {
+			System.out.println("Error al leer el archivo: " + e.getMessage());
 		}
-
-		float[] resultado = new float[validos.size()];
-		for (int i = 0; i < resultado.length; i++) {
-			resultado[i] = validos.get(i);
-		}
-		return resultado;
 	}
 }

@@ -1,6 +1,6 @@
-package es.upm.dit.repaso.ej706;
+package es.upm.dit.repaso.ej605;
 
-/** Ejercicio 7.6: viajante, cobra un extra por cada viaje realizado. */
+/** Ejercicio 6.5: viajante, cobra un extra por cada viaje realizado. */
 public class Viajante extends Empleado {
 
 	private static final double TARIFA_VIAJE = 300;

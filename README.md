@@ -1,12 +1,12 @@
 # Ejercicios de repaso de programación
 
 Conjunto de ejercicios de repaso de programación (tipos de datos y
-sentencias de control, arrays, Strings, listas y conjuntos, archivos,
-programación orientada a objetos y excepciones). El objetivo es
-refrescar los conocimientos para poder afrontar las asignaturas
-Algoritmos y Estructuras de Datos (ALED) del Grado en Ingeniería
-Biomédica y Análisis y Diseño de Software (ADSW) del Grado en
-Ingeniería de Tecnologías y Servicios de Telecomunicación.
+sentencias de control, arrays, Strings, listas y conjuntos,
+programación orientada a objetos, excepciones y archivos). El
+objetivo es refrescar los conocimientos para poder afrontar las
+asignaturas Algoritmos y Estructuras de Datos (ALED) del Grado en
+Ingeniería Biomédica y Análisis y Diseño de Software (ADSW) del
+Grado en Ingeniería de Tecnologías y Servicios de Telecomunicación.
 
 Este repositorio contiene las **soluciones** a los ejercicios, todas
 en un único proyecto de Eclipse, en orden de dificultad creciente.

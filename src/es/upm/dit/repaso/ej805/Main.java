@@ -1,18 +1,23 @@
 package es.upm.dit.repaso.ej805;
 
-/** Ejercicio 8.5: captura cualquier fallo con un mensaje amable en vez de la traza. */
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+
+/**
+ * Ejercicio 8.5: Cuenta las líneas de un archivo y muestra el resultado.
+ */
 public class Main {
+
+	private static final String RUTA_ARCHIVO = "datos.txt";
 
 	public static void main(String[] args) {
 		try {
-			// Fallo provocado: el array tiene 3 posiciones (0, 1 y 2), así que
-			// leer la 5 lanza ArrayIndexOutOfBoundsException
-			int[] numeros = { 10, 20, 30 };
-			System.out.println("Valor: " + numeros[5]);
-		} catch (Exception e) {
-			System.out.println("Lo sentimos mucho, algo ha fallado inesperadamente.");
-		} finally {
-			System.out.println("Fin de la ejecución.");
+			List<String> lineas = Files.readAllLines(Path.of(RUTA_ARCHIVO));
+			System.out.println("El archivo contiene " + lineas.size() + " líneas.");
+		} catch (IOException e) {
+			System.out.println("Error al leer el archivo: " + e.getMessage());
 		}
 	}
 }

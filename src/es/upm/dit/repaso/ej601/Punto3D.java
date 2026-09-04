@@ -1,6 +1,6 @@
-package es.upm.dit.repaso.ej701;
+package es.upm.dit.repaso.ej601;
 
-/** Ejercicio 7.1: punto en el espacio tridimensional. */
+/** Ejercicio 6.1: punto en el espacio tridimensional. */
 public class Punto3D {
 
 	private double x;

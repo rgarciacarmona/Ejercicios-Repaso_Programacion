@@ -1,8 +1,8 @@
-package es.upm.dit.repaso.ej707;
+package es.upm.dit.repaso.ej606;
 
 import java.time.LocalDate;
 
-/** Ejercicio 7.7: cuenta a plazo fijo, penaliza retiradas antes del vencimiento. */
+/** Ejercicio 6.6: cuenta a plazo fijo, penaliza retiradas antes del vencimiento. */
 public class CuentaPlazoFijo extends CuentaBancaria {
 
 	private static final float PENALIZACION = 0.05f;

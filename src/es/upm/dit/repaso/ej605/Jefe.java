@@ -1,6 +1,6 @@
-package es.upm.dit.repaso.ej706;
+package es.upm.dit.repaso.ej605;
 
-/** Ejercicio 7.6: jefe, cobra un suplemento por cada año de antigüedad. */
+/** Ejercicio 6.5: jefe, cobra un suplemento por cada año de antigüedad. */
 public class Jefe extends Empleado {
 
 	private static final double SUPLEMENTO_ANIO = 500;

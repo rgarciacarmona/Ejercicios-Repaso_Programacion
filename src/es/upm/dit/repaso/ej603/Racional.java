@@ -1,6 +1,6 @@
-package es.upm.dit.repaso.ej703;
+package es.upm.dit.repaso.ej603;
 
-/** Ejercicio 7.3: numero racional con suma, multiplicacion y simplificacion. */
+/** Ejercicio 6.3: numero racional con suma, multiplicacion y simplificacion. */
 public class Racional {
 
 	private int numerador;
@@ -16,10 +16,9 @@ public class Racional {
 		this.denominador = otro.denominador;
 	}
 
+	// Se da por bueno el denominador recibido: quien crea el racional debe haber
+	// comprobado antes que no es 0
 	public Racional(int numerador, int denominador) {
-		if (denominador == 0) {
-			throw new IllegalArgumentException("El denominador no puede ser 0");
-		}
 		this.numerador = numerador;
 		this.denominador = denominador;
 		simplificar();
@@ -50,7 +49,10 @@ public class Racional {
 
 	private int maximoComunDivisor(int a, int b) {
 		if (b == 0) {
-			return a == 0 ? 1 : a;
+			if (a == 0) {
+				return 1;
+			}
+			return a;
 		}
 		return maximoComunDivisor(b, a % b);
 	}

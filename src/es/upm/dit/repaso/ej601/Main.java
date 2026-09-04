@@ -1,26 +1,13 @@
 package es.upm.dit.repaso.ej601;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
-
-/**
- * Ejercicio 6.1: Lee un archivo de texto línea por línea y muestra el contenido
- * por pantalla.
- */
+/** Ejercicio 6.1: crea dos puntos y los muestra por pantalla. */
 public class Main {
 
-	private static final String RUTA_ARCHIVO = "datos.txt";
-
 	public static void main(String[] args) {
-		try {
-			List<String> lineas = Files.readAllLines(Path.of(RUTA_ARCHIVO));
-			for (String linea : lineas) {
-				System.out.println(linea);
-			}
-		} catch (IOException e) {
-			System.out.println("Error al leer el archivo: " + e.getMessage());
-		}
+		Punto3D p1 = new Punto3D(12, 13, 18);
+		Punto3D p2 = new Punto3D(8, 14, 0);
+
+		System.out.println("p1 = " + p1);
+		System.out.println("p2 = " + p2);
 	}
 }

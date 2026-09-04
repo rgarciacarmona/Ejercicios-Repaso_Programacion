@@ -1,11 +1,11 @@
-package es.upm.dit.repaso.ej610;
+package es.upm.dit.repaso.ej810;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
 /**
- * Ejercicio 6.10: Combina el contenido de dos archivos en un tercero,
+ * Ejercicio 8.10: Combina el contenido de dos archivos en un tercero,
  * concatenándolos (primero el contenido del primero, luego el del segundo).
  */
 public class Main {

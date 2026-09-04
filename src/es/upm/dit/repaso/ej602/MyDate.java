@@ -1,6 +1,6 @@
-package es.upm.dit.repaso.ej702;
+package es.upm.dit.repaso.ej602;
 
-/** Ejercicio 7.2: fecha con dia, mes y año. */
+/** Ejercicio 6.2: fecha con dia, mes y año. */
 public class MyDate {
 
 	private int day;

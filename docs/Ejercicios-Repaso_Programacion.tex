@@ -214,7 +214,7 @@ Además de lo anterior, para cada uno de los ejercicios siguientes, escriba un p
 \begin{enumerate}
     \item Cree un \code{Set} de \code{Measurements} (\code{Measurement} es una clase que contiene un \code{float[]} con 4 elementos) y añada 10 \code{Measurements} introducidos por el usuario.
     \item Modifique la clase \code{Measurement} para añadir un método \code{toString()}.
-    \item Modifique la clase \code{Measurement} para que utilice una \code{List} de \code{floats} en lugar de un \code{float[]}. Modifique todo el código de la clase que sea necesario.
+    \item Modifique la clase \code{Measurement} para que utilice una \code{List} de \code{floats} en lugar de un \code{float[]}. Modifique todo el código de la clase que sea necesario. Tenga en cuenta que, a diferencia del \code{float[]}, la \code{List} podrá contener cualquier número de \code{floats}, no necesariamente 4.
     \item Busque en un \code{Set} de \code{Measurements} todos los \code{Measurements} que contengan al menos un \code{float} cuyos valores se encuentren entre dos \code{floats} proporcionados por el usuario y muestre estos \code{Measurements} por pantalla. Tenga en cuenta que esta clase \code{Measurement} debería ser la que modificó en los dos ejercicios anteriores.
     \item Busque \code{Measurements} igual que en el ejercicio anterior, pero elimine los que cumplan el criterio en lugar de mostrarlos en pantalla.
     \item Convierta un \code{Set} de \code{Measurements} en un array, y viceversa.
@@ -274,9 +274,8 @@ Para la mayoría de los siguientes ejercicios deberá decidir usted mismo el tip
     La clase deberá tener los siguientes constructores:
     
     \begin{itemize}
-        \item Un constructor por defecto sin argumentos.
-        \item Un constructor que reciba el nombre, la edad y el sexo.
-        \item Un constructor que reciba todos los atributos menos el DNI como parámetros.
+        \item Un constructor por defecto sin argumentos. Como el DNI no se puede modificar más tarde, este constructor generará uno cualquiera usando el constructor sin argumentos de la clase \code{DNI}.
+        \item Un constructor que reciba el nombre, la edad, el DNI y el sexo.
         \item Un constructor que reciba todos los atributos.
     \end{itemize}
 
@@ -304,7 +303,7 @@ Para la mayoría de los siguientes ejercicios deberá decidir usted mismo el tip
     Por último, cree una clase que se pueda ejecutar que haga lo siguiente, en orden:
 
     \begin{enumerate}
-        \item Pida al usuario que escriba el nombre, edad, sexo, peso y altura de tres personas, así como sus números de DNI. Deberá aceptarse simplemente el número, el número y la letra, o nada (el número de DNI se generará usando el constructor sin argumentos de este clase).
+        \item Pida al usuario que escriba el nombre, edad, sexo, peso y altura de tres personas, así como el número de DNI de aquellas que vaya a crear con un constructor que lo reciba. Deberá aceptarse simplemente el número, el número y la letra, o nada (el número de DNI se generará usando el constructor sin argumentos de esa clase).
         \item Cree 3 objetos de la clase \code{Person}. Utilice tres tipos de constructores distintos y emplee los métodos \textit{setters} para asignar los valores que posea y que el constructor no haya asignado ya.
         \item Para cada persona, compruebe si está en su peso ideal, tiene sobrepeso o está por debajo de su peso ideal y comunique esta información a través de un mensaje personalizado.
         \item Escriba un mensaje en el que se indique cuáles de las personas son mayores de edad.

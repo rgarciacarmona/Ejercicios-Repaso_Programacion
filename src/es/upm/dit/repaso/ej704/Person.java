@@ -24,22 +24,14 @@ public class Person {
 	private double peso;
 	private double altura;
 
+	// Unico constructor que no recibe DNI: genera uno al azar. El resto lo pide,
+	// porque la clase no ofrece setDni y despues ya no se podria asignar
 	public Person() {
-		this("", 0, Sexo.MUJER);
+		this("", 0, new DNI(), Sexo.MUJER, 0, 0);
 	}
 
-	public Person(String nombre, int edad, Sexo sexo) {
-		this(nombre, edad, sexo, 0, 0);
-	}
-
-	// El DNI no se recibe: se autogenera porque la clase no ofrece setDni
-	public Person(String nombre, int edad, Sexo sexo, double peso, double altura) {
-		this.nombre = nombre;
-		this.edad = edad;
-		this.sexo = sexo;
-		this.peso = peso;
-		this.altura = altura;
-		this.dni = new DNI();
+	public Person(String nombre, int edad, DNI dni, Sexo sexo) {
+		this(nombre, edad, dni, sexo, 0, 0);
 	}
 
 	public Person(String nombre, int edad, DNI dni, Sexo sexo, double peso, double altura) {
@@ -95,7 +87,10 @@ public class Person {
 		this.altura = altura;
 	}
 
-	// IMC = peso (kg) / altura al cuadrado (m)
+	// IMC = peso (kg) / altura al cuadrado (m). Ojo: con una altura de 0 (el valor
+	// por defecto) la division no da un numero, sino NaN o infinito, y entonces
+	// evaluateWeight() devuelve una categoria sin sentido. Por eso quien crea la
+	// persona debe darle siempre una altura mayor que 0
 	public double computeBMI() {
 		return peso / (altura * altura);
 	}

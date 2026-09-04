@@ -12,6 +12,10 @@ public class CuentaVIP extends CuentaBancaria {
 
 	@Override
 	public boolean retirar(float cantidad) {
+		if (!esCantidadValida(cantidad)) {
+			return false;
+		}
+
 		float saldoResultante = saldo - cantidad;
 		if (saldoResultante < -saldoNegativoMax) {
 			System.out.println("Se supera el limite de descubierto permitido");

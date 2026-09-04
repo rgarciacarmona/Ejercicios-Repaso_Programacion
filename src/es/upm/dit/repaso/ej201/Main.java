@@ -8,8 +8,9 @@ package es.upm.dit.repaso.ej201;
 public class Main {
 
 	public static void main(String[] args) {
-		// Usar tipos pequeños para economizar memoria
-		byte diasPorAnio = 365;
+		// El tipo más pequeño que admite cada valor: 365 no cabe en un byte
+		// (rango -128..127), los demás sí
+		short diasPorAnio = 365;
 		byte horasPorDia = 24;
 		byte minutosPorHora = 60;
 		byte segundosPorMinuto = 60;

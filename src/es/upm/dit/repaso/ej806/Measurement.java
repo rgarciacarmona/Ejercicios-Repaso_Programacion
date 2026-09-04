@@ -1,8 +1,13 @@
 package es.upm.dit.repaso.ej806;
 
+import java.util.ArrayList;
 import java.util.List;
 
-/** Ejercicio 8.6: guarda medidas float en una List, exigiendo una lista no vacía. */
+/**
+ * Ejercicio 8.6: el Measurement de la sección 5, que ahora rechaza los valores
+ * no válidos. Es aquí, y no en la sección 5, porque hasta ahora no se conocían
+ * las excepciones: sin ellas un constructor no puede avisar de un error.
+ */
 public class Measurement {
 
 	private List<Float> valores;
@@ -11,7 +16,10 @@ public class Measurement {
 		if (valores == null || valores.isEmpty()) {
 			throw new InvalidMeasurementException("la lista de valores no puede ser nula ni estar vacía");
 		}
-		this.valores = valores;
+
+		// Se copia la lista: si se guardara la recibida, quien la creó podría
+		// cambiar sus valores más tarde y con ellos esta medida
+		this.valores = new ArrayList<>(valores);
 	}
 
 	public List<Float> getValores() {
@@ -21,5 +29,23 @@ public class Measurement {
 	@Override
 	public String toString() {
 		return valores.toString();
+	}
+
+	// Dos medidas con los mismos valores son la misma medida. Sin equals() ni
+	// hashCode() un HashSet las guardaría por separado y nunca detectaría repetidas
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof Measurement)) {
+			return false;
+		}
+		return valores.equals(((Measurement) obj).valores);
+	}
+
+	@Override
+	public int hashCode() {
+		return valores.hashCode();
 	}
 }

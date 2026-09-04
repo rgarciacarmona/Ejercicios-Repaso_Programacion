@@ -8,9 +8,10 @@ public class MyDate {
 	private int year;
 
 	public MyDate(int day, int month, int year) {
-		setYear(year);
-		setMonth(month);
-		setDay(day);
+		validar(day, month, year);
+		this.day = day;
+		this.month = month;
+		this.year = year;
 	}
 
 	public int getDay() {
@@ -18,9 +19,7 @@ public class MyDate {
 	}
 
 	public void setDay(int day) {
-		if (day < 1 || day > diasDelMes(month, year)) {
-			throw new IllegalArgumentException("Día no válido: " + day);
-		}
+		validar(day, month, year);
 		this.day = day;
 	}
 
@@ -28,10 +27,9 @@ public class MyDate {
 		return month;
 	}
 
+	// Cambiar solo el mes puede dejar una fecha imposible: 31/1 pasaría a 31/2
 	public void setMonth(int month) {
-		if (month < 1 || month > 12) {
-			throw new IllegalArgumentException("Mes no válido: " + month);
-		}
+		validar(day, month, year);
 		this.month = month;
 	}
 
@@ -39,12 +37,27 @@ public class MyDate {
 		return year;
 	}
 
+	// Cambiar solo el año también puede dejar una fecha imposible:
+	// 29/2/2024 (bisiesto) pasaría a 29/2/2025
 	public void setYear(int year) {
+		validar(day, month, year);
 		this.year = year;
 	}
 
+	// Comprueba que los tres valores juntos forman una fecha real. Todos los
+	// setters pasan por aquí, no solo el constructor.
+	private static void validar(int day, int month, int year) {
+		if (month < 1 || month > 12) {
+			throw new IllegalArgumentException("Mes no válido: " + month);
+		}
+		if (day < 1 || day > diasDelMes(month, year)) {
+			throw new IllegalArgumentException(
+					"Día no válido: " + day + "/" + month + "/" + year);
+		}
+	}
+
 	// Número de días del mes dado, teniendo en cuenta los años bisiestos.
-	private int diasDelMes(int mes, int anio) {
+	private static int diasDelMes(int mes, int anio) {
 		int[] diasPorMes = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 		if (mes == 2 && esBisiesto(anio)) {
 			return 29;
@@ -52,7 +65,7 @@ public class MyDate {
 		return diasPorMes[mes - 1];
 	}
 
-	private boolean esBisiesto(int anio) {
+	private static boolean esBisiesto(int anio) {
 		return (anio % 4 == 0 && anio % 100 != 0) || anio % 400 == 0;
 	}
 

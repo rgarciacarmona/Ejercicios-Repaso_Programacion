@@ -7,10 +7,12 @@ public class Main {
 
 	public static void main(String[] args) {
 		String lineaValida = "Ana,25,Madrid";
-		String lineaInvalida = "Ana,,25,,,";
+		String lineaHuecoEnMedio = "Ana,,25";
+		String lineaHuecoAlFinal = "Ana,25,Madrid,,";
 
 		procesar(lineaValida);
-		procesar(lineaInvalida);
+		procesar(lineaHuecoEnMedio);
+		procesar(lineaHuecoAlFinal);
 	}
 
 	// Procesa una línea CSV mostrando sus componentes, o el error si el formato no es válido.
@@ -26,7 +28,9 @@ public class Main {
 	// Divide la línea por comas. Se considera inválida si queda algún campo vacío,
 	// ya que el formato esperado es "valor1,valor2,valor3,...".
 	private static String[] dividir(String linea) throws FormatoCsvInvalidoException {
-		String[] campos = linea.split(SEPARADOR);
+		// El límite -1 conserva los campos vacíos del final: sin él,
+		// "Ana,25,Madrid,," devolvería solo 3 campos y parecería correcta
+		String[] campos = linea.split(SEPARADOR, -1);
 
 		for (String campo : campos) {
 			if (campo.trim().isEmpty()) {

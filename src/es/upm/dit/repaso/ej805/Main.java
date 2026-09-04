@@ -5,10 +5,10 @@ public class Main {
 
 	public static void main(String[] args) {
 		try {
+			// Fallo provocado: el array tiene 3 posiciones (0, 1 y 2), así que
+			// leer la 5 lanza ArrayIndexOutOfBoundsException
 			int[] numeros = { 10, 20, 30 };
-			int divisor = Integer.parseInt("0");
-			int resultado = numeros[5] / divisor;
-			System.out.println("Resultado: " + resultado);
+			System.out.println("Valor: " + numeros[5]);
 		} catch (Exception e) {
 			System.out.println("Lo sentimos mucho, algo ha fallado inesperadamente.");
 		} finally {

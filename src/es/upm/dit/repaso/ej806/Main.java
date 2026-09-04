@@ -2,6 +2,7 @@ package es.upm.dit.repaso.ej806;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 /** Ejercicio 8.6: crea un Measurement válido y captura el error al crear uno inválido. */
 public class Main {
@@ -14,11 +15,17 @@ public class Main {
 			System.out.println("Error inesperado: " + e.getMessage());
 		}
 
+		crearInvalido(Collections.emptyList());
+		crearInvalido(null);
+	}
+
+	// Intenta crear una medida que no cumple las condiciones y muestra el error.
+	private static void crearInvalido(List<Float> valores) {
 		try {
-			new Measurement(Collections.emptyList());
-			System.out.println("Error: no se lanzó excepción para lista vacía");
+			new Measurement(valores);
+			System.out.println("Error: no se lanzó excepción para " + valores);
 		} catch (InvalidMeasurementException e) {
-			System.out.println("Excepción esperada al crear Measurement inválido: " + e.getMessage());
+			System.out.println("Excepción esperada para " + valores + ": " + e.getMessage());
 		}
 	}
 }

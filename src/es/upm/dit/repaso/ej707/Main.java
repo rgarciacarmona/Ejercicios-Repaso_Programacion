@@ -21,6 +21,7 @@ public class Main {
 		plazoFijo.retirar(300f); // antes del vencimiento: aplica un 5% de penalizacion
 		vip.retirar(1200f); // deja la cuenta en descubierto, dentro del limite permitido
 		normal.transferir(150f, vip);
+		normal.retirar(-100f); // rechazada: retirar una cantidad negativa seria ingresar
 
 		for (CuentaBancaria cuenta : cuentas) {
 			System.out.println(cuenta);

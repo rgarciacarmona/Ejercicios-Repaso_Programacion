@@ -3,6 +3,7 @@ package es.upm.dit.repaso.ej603;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.Scanner;
 
 /**
@@ -24,14 +25,11 @@ public class Main {
 				contenido.append(linea).append("\n");
 			}
 
-			String textoAñadir = contenido.toString();
+			// APPEND escribe al final sin leer lo que ya hay; CREATE crea
+			// el archivo la primera vez, así que no hace falta comprobar si existe
 			Path ruta = Path.of(RUTA_ARCHIVO);
-			if (Files.exists(ruta)) {
-				String existente = Files.readString(ruta);
-				Files.writeString(ruta, existente + textoAñadir);
-			} else {
-				Files.writeString(ruta, textoAñadir);
-			}
+			Files.writeString(ruta, contenido.toString(),
+					StandardOpenOption.CREATE, StandardOpenOption.APPEND);
 			System.out.println("Líneas añadidas a " + RUTA_ARCHIVO);
 		} catch (IOException e) {
 			System.out.println("Error al escribir el archivo: " + e.getMessage());

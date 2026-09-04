@@ -35,10 +35,8 @@ public class Main {
 		}
 	}
 
+	// La lista nunca es null: el constructor de Measurement copia la que recibe.
 	private static boolean contieneEnRango(Measurement medida, float minimo, float maximo) {
-		if (medida.getValores() == null) {
-			return false;
-		}
 		for (float valor : medida.getValores()) {
 			if (valor >= minimo && valor <= maximo) {
 				return true;

@@ -10,6 +10,10 @@ public class Main {
 
 	private static final int NUM_PERSONAS = 3;
 
+	// La primera persona se crea con el constructor por defecto, el unico que no
+	// recibe DNI: el suyo se genera al azar y por eso no se le pide al usuario
+	private static final int PRIMERA_CON_DNI = 1;
+
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 
@@ -18,7 +22,7 @@ public class Main {
 		Sexo[] sexos = new Sexo[NUM_PERSONAS];
 		double[] pesos = new double[NUM_PERSONAS];
 		double[] alturas = new double[NUM_PERSONAS];
-		DNI[] dnis = new DNI[NUM_PERSONAS];
+		DNI[] dnis = new DNI[NUM_PERSONAS]; // dnis[0] no se usa: la persona 1 lo genera
 
 		for (int i = 0; i < NUM_PERSONAS; i++) {
 			System.out.println("--- Persona " + (i + 1) + " ---");
@@ -28,18 +32,18 @@ public class Main {
 			edades[i] = Integer.parseInt(sc.nextLine().trim());
 			System.out.print("Sexo (hombre/mujer): ");
 			sexos[i] = "hombre".equalsIgnoreCase(sc.nextLine().trim()) ? Sexo.HOMBRE : Sexo.MUJER;
-			System.out.print("Peso en kg: ");
-			pesos[i] = Double.parseDouble(sc.nextLine().trim());
-			System.out.print("Altura en m: ");
-			alturas[i] = Double.parseDouble(sc.nextLine().trim());
-			System.out.print("DNI (numero, numero+letra, o vacio para generarlo): ");
-			dnis[i] = leerDni(sc.nextLine());
+			pesos[i] = leerPositivo(sc, "Peso en kg: ");
+			alturas[i] = leerPositivo(sc, "Altura en m: ");
+
+			if (i >= PRIMERA_CON_DNI) {
+				System.out.print("DNI (numero, numero+letra, o vacio para generarlo): ");
+				dnis[i] = leerDni(sc.nextLine());
+			}
 		}
 		sc.close();
 
-		// Tres constructores distintos: sin argumentos, nombre+edad+sexo y el completo.
-		// Solo el constructor completo admite un DNI externo (DNI no tiene setter);
-		// en los otros dos casos el DNI se autogenera.
+		// Los tres constructores de Person: el vacio, el de nombre+edad+DNI+sexo
+		// y el completo. Los valores que el constructor no asigna van por setters
 		Person p1 = new Person();
 		p1.setNombre(nombres[0]);
 		p1.setEdad(edades[0]);
@@ -47,7 +51,7 @@ public class Main {
 		p1.setPeso(pesos[0]);
 		p1.setAltura(alturas[0]);
 
-		Person p2 = new Person(nombres[1], edades[1], sexos[1]);
+		Person p2 = new Person(nombres[1], edades[1], dnis[1], sexos[1]);
 		p2.setPeso(pesos[1]);
 		p2.setAltura(alturas[1]);
 
@@ -81,6 +85,22 @@ public class Main {
 			return;
 		}
 		System.out.println(persona.getNombre() + " esta en su peso ideal.");
+	}
+
+	// Pide un numero hasta que sea mayor que 0: con un peso o una altura de 0
+	// el IMC no da un numero y la persona quedaria mal clasificada.
+	private static double leerPositivo(Scanner sc, String mensaje) {
+		double valor;
+		do {
+			System.out.print(mensaje);
+			valor = Double.parseDouble(sc.nextLine().trim());
+
+			if (valor <= 0) {
+				System.out.println("Escriba un numero mayor que 0.");
+			}
+		} while (valor <= 0);
+
+		return valor;
 	}
 
 	private static DNI leerDni(String texto) {

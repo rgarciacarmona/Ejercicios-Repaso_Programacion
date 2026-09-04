@@ -1,5 +1,6 @@
 package es.upm.dit.repaso.ej410;
 
+import java.text.Normalizer;
 import java.util.Scanner;
 
 /**
@@ -14,18 +15,22 @@ public class Main {
 		String texto = scanner.nextLine();
 		scanner.close();
 
-		boolean esLindromo = esPalindromo(texto);
-		System.out.println("¿Es palíndroma? " + esLindromo);
+		System.out.println("¿Es palíndroma? " + esPalindromo(texto));
 	}
 
-	// Verifica si es palíndroma (sin espacios ni mayúsculas).
+	// Verifica si es palíndroma (sin tildes, espacios ni mayúsculas).
 	private static boolean esPalindromo(String texto) {
 		if (texto == null) {
 			return false;
 		}
 
-		// Elimina espacios y convierte a minúsculas
-		String limpio = texto.replaceAll(" ", "").toLowerCase();
+		// Quita tildes, espacios y mayúsculas para que "dábale arroz a la zorra
+		// el abad" se compare como "dabalearrozalazorraelabad".
+		// NFD separa cada letra de su tilde ("á" -> "a" + "´") y \p{M} borra la tilde
+		String limpio = Normalizer.normalize(texto, Normalizer.Form.NFD)
+				.replaceAll("\\p{M}", "")
+				.replaceAll("\\s", "")
+				.toLowerCase();
 
 		// Compara con su inverso
 		String inverso = new StringBuilder(limpio).reverse().toString();

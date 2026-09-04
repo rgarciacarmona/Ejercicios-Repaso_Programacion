@@ -7,7 +7,7 @@ package es.upm.dit.repaso.ej407;
 public class Main {
 
 	public static void main(String[] args) {
-		String[] ejemplos = {"123", "12.34", "12,34", "12.34,56", "abc", "-5.5", "+3.14"};
+		String[] ejemplos = {"123", "12.34", "12,34", "12.34,56", "abc", "-5.5", "+3.14", ".", ","};
 
 		for (String ejemplo : ejemplos) {
 			boolean valido = esNumeroDecimal(ejemplo);
@@ -15,33 +15,36 @@ public class Main {
 		}
 	}
 
-	// Verifica si es un número decimal válido (con . o , como separador, no ambos).
+	// Verifica si es un número decimal válido: signo opcional, al menos un dígito
+	// y como mucho un separador, punto o coma (por eso "12.34,56" no vale).
 	private static boolean esNumeroDecimal(String texto) {
 		if (texto == null || texto.isEmpty()) {
 			return false;
 		}
 
-		boolean tienePunto = false;
-		boolean tieneComma = false;
+		// El signo, si lo hay, solo puede ir al principio
+		char primero = texto.charAt(0);
+		int inicio = (primero == '+' || primero == '-') ? 1 : 0;
 
-		for (int i = 0; i < texto.length(); i++) {
+		boolean tieneSeparador = false;
+		int digitos = 0;
+
+		for (int i = inicio; i < texto.length(); i++) {
 			char c = texto.charAt(i);
 
-			if (c == '.') {
-				if (tienePunto || tieneComma) {
+			if (c == '.' || c == ',') {
+				if (tieneSeparador) {
 					return false;
 				}
-				tienePunto = true;
-			} else if (c == ',') {
-				if (tieneComma || tienePunto) {
-					return false;
-				}
-				tieneComma = true;
-			} else if (!Character.isDigit(c)) {
+				tieneSeparador = true;
+			} else if (Character.isDigit(c)) {
+				digitos++;
+			} else {
 				return false;
 			}
 		}
 
-		return true;
+		// Sin dígitos no hay número: "-", "." o "," no son válidos
+		return digitos > 0;
 	}
 }

@@ -14,22 +14,22 @@ public class Main {
 		Set<Measurement> medidas = crearMedidasEjemplo();
 		System.out.println("Antes: " + medidas);
 
+		// Una medida nunca cambia sus valores: se crean medidas nuevas. Cambiar
+		// los de una que ya está dentro del Set alteraría su hashCode y el Set
+		// dejaría de encontrarla
+		Set<Measurement> limpias = new HashSet<>();
 		for (Measurement medida : medidas) {
-			quitarDuplicados(medida);
+			limpias.add(sinDuplicados(medida));
 		}
 
-		System.out.println("Después: " + medidas);
+		System.out.println("Después: " + limpias);
 	}
 
-	// Elimina valores repetidos dentro de la List de la medida, conservando el orden.
-	private static void quitarDuplicados(Measurement medida) {
+	// Devuelve una medida nueva sin valores repetidos, conservando el orden
+	// (LinkedHashSet descarta los repetidos y mantiene el orden de entrada).
+	private static Measurement sinDuplicados(Measurement medida) {
 		List<Float> valores = medida.getValores();
-		if (valores == null) {
-			return;
-		}
-		Set<Float> sinRepetidos = new LinkedHashSet<>(valores);
-		valores.clear();
-		valores.addAll(sinRepetidos);
+		return new Measurement(new ArrayList<>(new LinkedHashSet<>(valores)));
 	}
 
 	private static Set<Measurement> crearMedidasEjemplo() {

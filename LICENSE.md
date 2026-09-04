@@ -1,3 +1,8 @@
+# Licencia del código
+
+Se aplica al código fuente (`src/`). Los enunciados se rigen por
+[`LICENSE-DOCS.md`](LICENSE-DOCS.md).
+
 MIT License
 
 Copyright (c) 2025 DIT-UPM

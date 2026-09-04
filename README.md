@@ -43,5 +43,8 @@ ejercicios nuevos de la sección 5 sí siguen el esquema normal:
 
 ## Licencia
 
-Este proyecto se distribuye bajo licencia MIT. Consulta
+El código fuente (`src/`) se distribuye bajo licencia MIT. Consulta
 [`LICENSE.md`](LICENSE.md).
+
+Los enunciados (`docs/`) se distribuyen bajo licencia CC BY-NC-SA 4.0.
+Consulta [`LICENSE-DOCS.md`](LICENSE-DOCS.md).
